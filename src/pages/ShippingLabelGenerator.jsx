@@ -64,7 +64,7 @@ function BarcodeDisplay({ value }) {
 function LabelPreview({ inputs }) {
   const courier = COURIERS.find(c => c.id === inputs.courier) || COURIERS[0];
   const labelSize = LABEL_SIZES.find(s => s.id === inputs.labelSize) || LABEL_SIZES[0];
-  const scale = 400 / labelSize.width;
+  const scale = 480 / labelSize.width;
 
   return (
     <div
@@ -262,7 +262,7 @@ function ShippingLabelGenerator() {
     productDesc: "", productValue: "",
     // Options
     courier: "delhivery", customCourier: "",
-    labelSize: "4x6", codEnabled: false, codAmount: "",
+    labelSize: "6x4", codEnabled: false, codAmount: "",
     fragile: false, returnLabel: false, specialInstructions: "",
   });
   const [activeSection, setActiveSection] = useState("sender");
@@ -399,7 +399,7 @@ function ShippingLabelGenerator() {
       </section>
 
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr",gap: 24, marginTop: 24, paddingBottom: 48, alignItems: "start" }}>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48, alignItems: "start" }}>
 
 
           {/* LEFT: Form */}
@@ -765,13 +765,34 @@ function ShippingLabelGenerator() {
                 </>
               )}
             </div>
+          {/* Checklist */}
+            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "20px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+              <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a", marginBottom: 12 }}>Label Checklist</h3>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                {[
+                  ["Sender Name", !!inputs.senderName],
+                  ["Sender Address", !!inputs.senderAddress1],
+                  ["Sender PIN Code", inputs.senderPin.length === 6],
+                  ["Receiver Name", !!inputs.receiverName],
+                  ["Receiver Address", !!inputs.receiverAddress1],
+                  ["Receiver PIN Code", inputs.receiverPin.length === 6],
+                  ["Order ID / Barcode", !!inputs.orderId],
+                  ["Weight", !!inputs.weight],
+                ].map(([label, done]) => (
+                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
+                    <span style={{ fontSize: 14, color: done ? "#16a34a" : "#e2e8f0" }}>{done ? "✅" : "⬜"}</span>
+                    <span style={{ color: done ? "#374151" : "#94a3b8" }}>{label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* RIGHT: Preview */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 16, alignItems: "stretch" }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 16, position: "sticky", top: 24 }}>
 
             {/* Label Preview */}
-            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "24px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)", alignSelf: "start" }}>
+            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "24px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a" }}>Label Preview</h3>
@@ -837,28 +858,7 @@ function ShippingLabelGenerator() {
               </div>
             )}
 
-            {/* Checklist */}
-            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "20px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-              <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a", marginBottom: 12 }}>Label Checklist</h3>
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                {[
-                  ["Sender Name", !!inputs.senderName],
-                  ["Sender Address", !!inputs.senderAddress1],
-                  ["Sender PIN Code", inputs.senderPin.length === 6],
-                  ["Receiver Name", !!inputs.receiverName],
-                  ["Receiver Address", !!inputs.receiverAddress1],
-                  ["Receiver PIN Code", inputs.receiverPin.length === 6],
-                  ["Order ID / Barcode", !!inputs.orderId],
-                  ["Weight", !!inputs.weight],
-                ].map(([label, done]) => (
-                  <div key={label} style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 13 }}>
-                    <span style={{ fontSize: 14, color: done ? "#16a34a" : "#e2e8f0" }}>{done ? "✅" : "⬜"}</span>
-                    <span style={{ color: done ? "#374151" : "#94a3b8" }}>{label}</span>
-                  </div>
-                ))}
-              </div>
             </div>
-          </div>
         </div>
 
         {/* How It Works */}

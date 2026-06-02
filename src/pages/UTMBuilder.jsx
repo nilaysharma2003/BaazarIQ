@@ -402,7 +402,7 @@ function UTMBuilder() {
                 {/* Term + Content */}
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                   <div>
-                    <label style={labelStyle}>UTM Term <span style={{ color: "#94a3b8", fontWeight: 400 }}>(optional)</span></label>
+                    <label style={labelStyle}>UTM Term</label>
                     <input type="text" value={inputs.term} onChange={(e) => set("term", e.target.value.toLowerCase())}
                       placeholder="running_shoes, laptop_bag"
                       style={inputStyle}
@@ -412,7 +412,7 @@ function UTMBuilder() {
                     <span style={{ fontSize: 11, color: "#94a3b8" }}>Paid search keywords only</span>
                   </div>
                   <div>
-                    <label style={labelStyle}>UTM Content <span style={{ color: "#94a3b8", fontWeight: 400 }}>(optional)</span></label>
+                    <label style={labelStyle}>UTM Content</label>
                     <input type="text" value={inputs.content} onChange={(e) => set("content", e.target.value.toLowerCase())}
                       placeholder="banner_v1, cta_button"
                       style={inputStyle}
@@ -425,7 +425,7 @@ function UTMBuilder() {
 
                 {/* Campaign ID */}
                 <div>
-                  <label style={labelStyle}>Campaign ID <span style={{ color: "#94a3b8", fontWeight: 400 }}>(optional)</span></label>
+                  <label style={labelStyle}>Campaign ID</label>
                   <input type="text" value={inputs.campaignId} onChange={(e) => set("campaignId", e.target.value)}
                     placeholder="campaign_001"
                     style={inputStyle}
