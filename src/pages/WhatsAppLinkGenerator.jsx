@@ -58,6 +58,7 @@ function WhatsAppLinkGenerator() {
     utmSource: "",
     utmMedium: "",
     utmCampaign: "",
+    groupName: "",
     multiMode: false,
     multiMessages: ["", "", "", "", ""],
   });
@@ -74,6 +75,10 @@ function WhatsAppLinkGenerator() {
   }, []);
 
   const generateLink = useCallback(() => {
+    if (inputs.linkType === "Group") {
+      const groupNameEncoded = encodeURIComponent(inputs.groupName || "MyGroup");
+      return `https://chat.whatsapp.com/${groupNameEncoded}`;
+    }
     const cleanNumber = inputs.countryCode.replace("+", "") + inputs.phoneNumber.replace(/\D/g, "");
     let url = `https://wa.me/${cleanNumber}`;
     const params = new URLSearchParams();
@@ -86,7 +91,7 @@ function WhatsAppLinkGenerator() {
     return url;
   }, [inputs]);
 
-  const isValidPhone = inputs.phoneNumber.replace(/\D/g, "").length >= 7;
+  const isValidPhone = inputs.linkType === "Group" ? !!inputs.groupName : inputs.phoneNumber.replace(/\D/g, "").length >= 10;
 
   useEffect(() => {
     if (isValidPhone) {
@@ -126,7 +131,7 @@ function WhatsAppLinkGenerator() {
     linkType: "Business", countryCode: "+91", phoneNumber: "",
     businessName: "", buttonLabel: "", messageTemplate: "Custom",
     message: "", utmSource: "", utmMedium: "", utmCampaign: "",
-    multiMode: false, multiMessages: ["", "", "", "", ""],
+    groupName: "", multiMode: false, multiMessages: ["", "", "", "", ""],
   });
 
   const generatedLink = generateLink();
@@ -237,27 +242,47 @@ function WhatsAppLinkGenerator() {
                 </div>
               </div>
 
-              {/* Country Code + Phone */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 12 }}>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Country Code</label>
-                  <select value={inputs.countryCode} onChange={(e) => set("countryCode", e.target.value)} style={{
-                    padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
-                    fontSize: 13, background: "#fff", cursor: "pointer",
-                    fontFamily: "'Poppins', sans-serif", color: "#0f172a", outline: "none",
-                  }}
-                    onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
-                    onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
-                  >
-                    {COUNTRY_CODES.map((c) => (
-                      <option key={c.name} value={c.code}>{c.flag} {c.name} ({c.code})</option>
-                    ))}
-                  </select>
+              {/* Country Code + Phone — hidden for Group */}
+              {inputs.linkType !== "Group" && (
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 12 }}>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Country Code</label>
+                    <select value={inputs.countryCode} onChange={(e) => set("countryCode", e.target.value)} style={{
+                      padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
+                      fontSize: 13, background: "#fff", cursor: "pointer",
+                      fontFamily: "'Poppins', sans-serif", color: "#0f172a", outline: "none",
+                    }}
+                      onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
+                      onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
+                    >
+                      {COUNTRY_CODES.map((c) => (
+                        <option key={c.name} value={c.code}>{c.flag} {c.name} ({c.code})</option>
+                      ))}
+                    </select>
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                    <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Phone Number</label>
+                    <input type="text" value={inputs.phoneNumber} onChange={(e) => set("phoneNumber", e.target.value)}
+                      placeholder="9876543210"
+                      style={{
+                        padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
+                        fontSize: 13, background: "#fff", outline: "none",
+                        fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                      }}
+                      onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
+                      onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
+                    />
+                    <span style={{ fontSize: 11, color: "#94a3b8" }}>Enter number without country code or spaces</span>
+                  </div>
                 </div>
+              )}
+
+              {/* Group Name — only show for Group */}
+              {inputs.linkType === "Group" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Phone Number</label>
-                  <input type="text" value={inputs.phoneNumber} onChange={(e) => set("phoneNumber", e.target.value)}
-                    placeholder="9876543210"
+                  <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Group Name *</label>
+                  <input type="text" value={inputs.groupName} onChange={(e) => set("groupName", e.target.value)}
+                    placeholder="My WhatsApp Group"
                     style={{
                       padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                       fontSize: 13, background: "#fff", outline: "none",
@@ -266,25 +291,27 @@ function WhatsAppLinkGenerator() {
                     onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                     onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
                   />
-                  <span style={{ fontSize: 11, color: "#94a3b8" }}>Enter number without country code or spaces</span>
+                  <span style={{ fontSize: 11, color: "#94a3b8" }}>Enter your WhatsApp group invite link name</span>
                 </div>
-              </div>
+              )}
 
-              {/* Business Name */}
-              <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Business Name (optional)</label>
-                <input type="text" value={inputs.businessName} onChange={(e) => set("businessName", e.target.value)}
-                  placeholder="BaazarIQ Store"
-                  style={{
-                    padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
-                    fontSize: 13, background: "#fff", outline: "none",
-                    fontFamily: "'Poppins', sans-serif", color: "#0f172a",
-                  }}
-                  onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
-                  onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
-                />
-                <span style={{ fontSize: 11, color: "#94a3b8" }}>Used in AI message suggestions</span>
-              </div>
+              {/* Business Name — only show for Business type */}
+              {inputs.linkType === "Business" && (
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Business Name (optional)</label>
+                  <input type="text" value={inputs.businessName} onChange={(e) => set("businessName", e.target.value)}
+                    placeholder="BaazarIQ Store"
+                    style={{
+                      padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
+                      fontSize: 13, background: "#fff", outline: "none",
+                      fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                    }}
+                    onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
+                    onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
+                  />
+                  <span style={{ fontSize: 11, color: "#94a3b8" }}>Used in AI message suggestions</span>
+                </div>
+              )}
 
               {/* Message Template */}
               <div>

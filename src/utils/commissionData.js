@@ -141,7 +141,14 @@ export function calcCommission({
     const commissionFee = sp * catData.commission;
     const closingFee = catData.closing;
     const gstAmount = sp * (gst / 100);
-    const totalFees = commissionFee + closingFee + gstAmount;
+    const shippingFeeMap = {
+      Amazon: 50,
+      Flipkart: 45,
+      Meesho: 0,
+      Jiomart: 40,
+    };
+    const shippingFee = shippingFeeMap[name] || 0;
+    const totalFees = commissionFee + closingFee + gstAmount + shippingFee;
     const profit = sp - totalFees - pc;
     const margin = sp > 0 ? (profit / sp) * 100 : 0;
     const roi = pc > 0 ? (profit / pc) * 100 : 0;
@@ -151,6 +158,7 @@ export function calcCommission({
       commissionPct: catData.commission * 100,
       commissionFee,
       closingFee,
+      shippingFee,
       gstAmount,
       totalFees,
       profit,

@@ -801,6 +801,7 @@ function MarketplaceCommission() {
                       ["Commission %", (d) => `${d.commissionPct.toFixed(0)}%`],
                       ["Commission Fee", (d) => `₹${d.commissionFee.toFixed(2)}`],
                       ["Closing Fee", (d) => `₹${d.closingFee.toFixed(2)}`],
+                      ["Shipping Fee", (d) => `₹${(d.shippingFee ?? 0).toFixed(2)}`],
                       ["GST Amount", (d) => `₹${d.gstAmount.toFixed(2)}`],
                       ["Total Fees", (d) => `₹${d.totalFees.toFixed(2)}`],
                       ["Net Profit", (d) => `₹${d.profit.toFixed(2)}`],
@@ -889,7 +890,8 @@ function MarketplaceCommission() {
                     dataKey="name"
                     tick={{ fontSize: 12, fontWeight: 600 }}
                   />
-                  <YAxis tick={{ fontSize: 12 }} />
+                  <YAxis yAxisId="left" tick={{ fontSize: 12 }} />
+                  <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 12 }} domain={[0, 100]} tickFormatter={(v) => `${v}`} />
                   <Tooltip
                     formatter={(v, name) =>
                       name === "Score" ? `${v}/100` : `₹${v}`
@@ -901,9 +903,9 @@ function MarketplaceCommission() {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: 12 }} />
-                  <Bar dataKey="Profit" fill="#22c55e" radius={[6, 6, 0, 0]} />
-                  <Bar dataKey="Fees" fill="#ef4444" radius={[6, 6, 0, 0]} />
-                  <Bar dataKey="Score" fill="#2563eb" radius={[6, 6, 0, 0]} />
+                  <Bar dataKey="Profit" fill="#22c55e" radius={[6, 6, 0, 0]} yAxisId="left" />
+                  <Bar dataKey="Fees" fill="#ef4444" radius={[6, 6, 0, 0]} yAxisId="left" />
+                  <Bar dataKey="Score" fill="#2563eb" radius={[6, 6, 0, 0]} yAxisId="right" />
                 </BarChart>
               </ResponsiveContainer>
             </div>

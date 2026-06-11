@@ -274,12 +274,32 @@ function BarcodeGenerator() {
   const printBarcode = () => {
     const label = document.getElementById("barcode-label");
     if (!label) return;
+
+    // Convert all canvas elements to images first
+    const cloned = label.cloneNode(true);
+    const originalCanvases = label.querySelectorAll("canvas");
+    const clonedCanvases = cloned.querySelectorAll("canvas");
+
+    originalCanvases.forEach((canvas, i) => {
+      const img = document.createElement("img");
+      img.src = canvas.toDataURL("image/png");
+      img.style.cssText = canvas.style.cssText;
+      img.style.maxWidth = "100%";
+      if (clonedCanvases[i]) {
+        clonedCanvases[i].parentNode.replaceChild(img, clonedCanvases[i]);
+      }
+    });
+
     const win = window.open("", "_blank");
     win.document.write(`
       <html><head><title>Print Barcode</title>
-      <style>body{display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;background:#fff}
-      @media print{body{margin:0}}</style></head>
-      <body>${label.outerHTML}<script>window.onload=()=>{window.print();window.close()}</script></body></html>
+      <style>
+        body{display:flex;justify-content:center;align-items:center;min-height:100vh;margin:0;background:#fff}
+        @media print{body{margin:0}}
+        img{max-width:100%}
+      </style></head>
+      <body>${cloned.outerHTML}</body></html>
+      <script>window.onload=()=>{window.print();window.close()}</script>
     `);
     win.document.close();
   };
