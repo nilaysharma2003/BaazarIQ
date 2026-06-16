@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import JsBarcode from "jsbarcode";
 
 const COURIERS = [
@@ -61,10 +61,11 @@ function BarcodeDisplay({ value }) {
   return <svg ref={ref} style={{ maxWidth: "100%" }} />;
 }
 
-function LabelPreview({ inputs }) {
+function LabelPreview({ inputs, isMobile }) {
   const courier = COURIERS.find(c => c.id === inputs.courier) || COURIERS[0];
   const labelSize = LABEL_SIZES.find(s => s.id === inputs.labelSize) || LABEL_SIZES[0];
-  const scale = 480 / labelSize.width;
+  const maxWidth = isMobile ? window.innerWidth - 80 : 480;
+  const scale = maxWidth / labelSize.width;
 
   return (
     <div
@@ -248,6 +249,14 @@ function LabelPreview({ inputs }) {
 }
 
 function ShippingLabelGenerator() {
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [inputs, setInputs] = useState({
     // Sender
     senderName: "", senderCompany: "", senderAddress1: "",
@@ -329,6 +338,7 @@ function ShippingLabelGenerator() {
     padding: "9px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
     fontSize: 13, background: "#fff", outline: "none", width: "100%",
     fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+    boxSizing: "border-box",
   };
   const labelStyle = { fontSize: 13, fontWeight: 600, color: "#374151", display: "block", marginBottom: 5 };
 
@@ -344,7 +354,7 @@ function ShippingLabelGenerator() {
 
       {/* Hero */}
       <section style={{
-        background: "#030a10", padding: "80px 24px 90px",
+        background: "#030a10", padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{
@@ -360,28 +370,28 @@ function ShippingLabelGenerator() {
             <span style={{ fontSize: 16 }}>🏷️</span>
             <span style={{ color: "#35d0b2", fontSize: 14, fontWeight: 600 }}>Free Shipping Label Generator</span>
           </div>
-          <p style={{ color: "#35d0b2", fontSize: 16, fontWeight: 600, marginBottom: 12 }}>
+          <p style={{ color: "#35d0b2", fontSize: isMobile ? 14 : 16, fontWeight: 600, marginBottom: 12 }}>
             Professional Shipping Labels for Indian Ecommerce Sellers
           </p>
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)", fontWeight: 900,
+            fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 72px)", fontWeight: 900,
             letterSpacing: "-2px", lineHeight: 1.1, color: "#f8fafc", marginBottom: 20,
           }}>
             Shipping Label Generator
             <br />
             for Sellers
           </h1>
-          <p style={{ color: "#94a3b8", fontSize: 18, maxWidth: 620, margin: "0 auto 16px", lineHeight: 1.75 }}>
+          <p style={{ color: "#94a3b8", fontSize: isMobile ? 15 : 18, maxWidth: 620, margin: "0 auto 16px", lineHeight: 1.75 }}>
             Generate professional shipping labels with auto barcode, COD badge, courier
             branding and fragile warnings — print directly from browser or save as PDF, free forever.
           </p>
-          <p style={{ color: "#64748b", fontSize: 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
+          <p style={{ color: "#64748b", fontSize: isMobile ? 13 : 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
             Supports Delhivery, Bluedart, DTDC, XpressBees, Ekart and Shadowfax — with
             live label preview, return label mode and AI validation for every shipment.
           </p>
           <div style={{
             display: "flex", justifyContent: "center", gap: 0, flexWrap: "wrap",
-            borderTop: "1px solid rgba(53,208,178,0.15)", paddingTop: 28,
+            borderTop: "1px solid rgba(53,208,178,0.15)", paddingTop: isMobile ? 20 : 28,
           }}>
             {[
               ["6 Couriers", "Supported"],
@@ -389,18 +399,23 @@ function ShippingLabelGenerator() {
               ["COD Badge", "Included"],
               ["Print Ready", "Direct Printing"],
             ].map(([n, l], i) => (
-              <div key={l} style={{ textAlign: "center", padding: "0 28px", borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none" }}>
-                <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
-                <div style={{ fontSize: 12, color: "#64748b" }}>{l}</div>
+              <div key={l} style={{
+                textAlign: "center",
+                padding: isMobile ? "8px 10px" : "0 28px",
+                borderRight: isMobile ? "none" : (i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none"),
+                width: isMobile ? "50%" : "auto",
+                marginBottom: isMobile ? 8 : 0,
+              }}>
+                <div style={{ fontSize: isMobile ? 13 : 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
+                <div style={{ fontSize: isMobile ? 11 : 12, color: "#64748b" }}>{l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48, alignItems: "start" }}>
-
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48, alignItems: "start" }}>
 
           {/* LEFT: Form */}
           <div style={{
@@ -409,10 +424,11 @@ function ShippingLabelGenerator() {
             boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
           }}>
             {/* Section tabs */}
-            <div style={{ display: "flex", borderBottom: "1px solid #e8ecf0", background: "#f8fafc" }}>
+            <div style={{ display: "flex", flexWrap: isMobile ? "wrap" : "nowrap", borderBottom: "1px solid #e8ecf0", background: "#f8fafc" }}>
               {sections.map(s => (
                 <button key={s.id} onClick={() => setActiveSection(s.id)} style={{
-                  flex: 1, padding: "12px 8px", border: "none",
+                  flex: isMobile ? "1 1 50%" : 1,
+                  padding: "12px 8px", border: "none",
                   background: activeSection === s.id ? "#fff" : "transparent",
                   color: activeSection === s.id ? "#35d0b2" : "#64748b",
                   fontWeight: 600, fontSize: 12, cursor: "pointer",
@@ -422,12 +438,12 @@ function ShippingLabelGenerator() {
               ))}
             </div>
 
-            <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 14 }}>
+            <div style={{ padding: isMobile ? "16px" : "24px", display: "flex", flexDirection: "column", gap: 14 }}>
 
               {/* SENDER SECTION */}
               {activeSection === "sender" && (
                 <>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
                     <div>
                       <label style={labelStyle}>Sender Name *</label>
                       <input type="text" value={inputs.senderName} onChange={e => set("senderName", e.target.value)}
@@ -457,7 +473,7 @@ function ShippingLabelGenerator() {
                       onFocus={e => { e.target.style.borderColor = "#35d0b2"; }}
                       onBlur={e => { e.target.style.borderColor = "#e2e8f0"; }} />
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 12 }}>
                     <div>
                       <label style={labelStyle}>City *</label>
                       <input type="text" value={inputs.senderCity} onChange={e => set("senderCity", e.target.value)}
@@ -529,7 +545,7 @@ function ShippingLabelGenerator() {
                       onFocus={e => { e.target.style.borderColor = "#35d0b2"; }}
                       onBlur={e => { e.target.style.borderColor = "#e2e8f0"; }} />
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 12 }}>
                     <div>
                       <label style={labelStyle}>City *</label>
                       <input type="text" value={inputs.receiverCity} onChange={e => set("receiverCity", e.target.value)}
@@ -580,7 +596,7 @@ function ShippingLabelGenerator() {
               {/* PACKAGE SECTION */}
               {activeSection === "package" && (
                 <>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
                     <div>
                       <label style={labelStyle}>Order ID / AWB *</label>
                       <input type="text" value={inputs.orderId} onChange={e => set("orderId", e.target.value)}
@@ -597,7 +613,7 @@ function ShippingLabelGenerator() {
                         onBlur={e => { e.target.style.borderColor = "#e2e8f0"; }} />
                     </div>
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
+                  <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 12 }}>
                     {["length", "width", "height"].map(dim => (
                       <div key={dim}>
                         <label style={labelStyle}>{dim.charAt(0).toUpperCase() + dim.slice(1)} (cm)</label>
@@ -765,10 +781,11 @@ function ShippingLabelGenerator() {
                 </>
               )}
             </div>
-          {/* Checklist */}
+
+            {/* Checklist */}
             <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "20px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a", marginBottom: 12 }}>Label Checklist</h3>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 8 }}>
                 {[
                   ["Sender Name", !!inputs.senderName],
                   ["Sender Address", !!inputs.senderAddress1],
@@ -792,7 +809,7 @@ function ShippingLabelGenerator() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16, position: "sticky", top: 24 }}>
 
             {/* Label Preview */}
-            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "24px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+            <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: isMobile ? "16px" : "24px", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a" }}>Label Preview</h3>
@@ -806,12 +823,12 @@ function ShippingLabelGenerator() {
                 </div>
               </div>
 
-              <div style={{ display: "flex", justifyContent: "center", marginBottom: 16 }}>
-                <LabelPreview inputs={inputs} />
+              <div style={{ display: "flex", justifyContent: "center", marginBottom: 16, overflowX: "hidden" }}>
+                <LabelPreview inputs={inputs} isMobile={isMobile} />
               </div>
 
               {/* Print/Download buttons */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 10 }}>
                 <button onClick={printLabel} style={{
                   background: "#35d0b2", color: "#030a10", border: "none",
                   padding: "12px", borderRadius: 10, fontSize: 14, fontWeight: 700,
@@ -858,23 +875,23 @@ function ShippingLabelGenerator() {
               </div>
             )}
 
-            </div>
+          </div>
         </div>
 
         {/* How It Works */}
-        <div style={{ background: "#ffffff", borderRadius: 16, padding: "48px 40px", marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, padding: isMobile ? "24px 16px" : "48px 40px", marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 48, alignItems: "start" }}>
             <div>
               <div style={{
                 display: "inline-block", background: "rgba(53,208,178,0.1)",
                 border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,
                 padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 600, marginBottom: 16,
               }}>How It Works</div>
-              <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.8px", lineHeight: 1.3, color: "#0f172a" }}>
+              <h2 style={{ fontSize: isMobile ? 20 : 26, fontWeight: 800, letterSpacing: "-0.8px", lineHeight: 1.3, color: "#0f172a" }}>
                 How to Create Your Shipping Label in 60 Seconds
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
                 ["Step 1 — Enter sender details", "Add your business name, full address and phone number so couriers can contact you if needed."],
                 ["Step 2 — Enter receiver details", "Add the customer's complete delivery address including PIN code — this is critical for delivery."],
@@ -898,13 +915,13 @@ function ShippingLabelGenerator() {
         </div>
 
         {/* FAQ */}
-        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "32px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "32px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
           <div style={{
             display: "inline-block", background: "rgba(53,208,178,0.1)",
             border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,
             padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 600, marginBottom: 16,
           }}>FAQ</div>
-          <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
+          <h2 style={{ fontWeight: 800, fontSize: isMobile ? 18 : 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
           {[
             ["What information is required on a shipping label?", "A shipping label must include sender name and address, receiver name and address, PIN codes, phone numbers, and a tracking barcode. COD amount is required for cash on delivery orders."],
             ["Can I print on regular paper?", "Yes — you can print on A4 plain paper and cut it out. However, thermal label paper (4×6 inch) is recommended for professional shipping as it's waterproof and adhesive."],

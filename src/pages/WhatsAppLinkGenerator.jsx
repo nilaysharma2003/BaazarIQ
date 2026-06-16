@@ -66,6 +66,13 @@ function WhatsAppLinkGenerator() {
   const [copiedMarkdown, setCopiedMarkdown] = useState(false);
   const [utmExpanded, setUtmExpanded] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState("");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const set = useCallback((k, v) => {
     setInputs((prev) => {
@@ -91,7 +98,9 @@ function WhatsAppLinkGenerator() {
     return url;
   }, [inputs]);
 
-  const isValidPhone = inputs.linkType === "Group" ? !!inputs.groupName : inputs.phoneNumber.replace(/\D/g, "").length >= 10;
+  const isValidPhone = inputs.linkType === "Group"
+    ? !!inputs.groupName
+    : inputs.phoneNumber.replace(/\D/g, "").length >= 10;
 
   useEffect(() => {
     if (isValidPhone) {
@@ -146,12 +155,17 @@ function WhatsAppLinkGenerator() {
     { icon: "🔄", title: "After Sales Support", msg: `Hi! I recently purchased from ${inputs.businessName || "[Business]"} and need some assistance.` },
   ];
 
+  // Consistent padding for all sections
+  const sectionPad = isMobile ? "20px 16px" : "32px";
+  const outerPad = isMobile ? "0 16px" : "0 24px";
+
   return (
     <div style={{ background: "#f1f5f9", minHeight: "100vh", fontFamily: "'Poppins', sans-serif" }}>
 
-      {/* Hero */}
+      {/* ── HERO ── */}
       <section style={{
-        background: "#030a10", padding: "80px 24px 90px",
+        background: "#030a10",
+        padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{
@@ -162,44 +176,74 @@ function WhatsAppLinkGenerator() {
           <div style={{
             display: "inline-flex", alignItems: "center", gap: 8,
             background: "rgba(53,208,178,0.1)", border: "1px solid rgba(53,208,178,0.2)",
-            borderRadius: 100, padding: "6px 18px", marginBottom: 20,
+            borderRadius: 100, padding: "6px 18px", marginBottom: 16,
           }}>
-            <span style={{ fontSize: 16 }}>💬</span>
-            <span style={{ color: "#35d0b2", fontSize: 14, fontWeight: 600 }}>Free WhatsApp Link Generator</span>
+            <span style={{ fontSize: 14 }}>💬</span>
+            <span style={{ color: "#35d0b2", fontSize: 13, fontWeight: 600 }}>Free WhatsApp Link Generator</span>
           </div>
-          <p style={{ color: "#35d0b2", fontSize: 16, fontWeight: 600, marginBottom: 12, letterSpacing: "0.3px" }}>
+
+          <p style={{ color: "#35d0b2", fontSize: isMobile ? 13 : 16, fontWeight: 600, marginBottom: 10, letterSpacing: "0.3px" }}>
             Turn Your Number Into a One-Click Chat Button — Free Forever
           </p>
+
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)", fontWeight: 900,
-            letterSpacing: "-2px", lineHeight: 1.1, color: "#f8fafc", marginBottom: 20,
+            fontSize: isMobile ? "clamp(28px,7vw,40px)" : "clamp(42px,6vw,72px)",
+            fontWeight: 900, letterSpacing: "-2px",
+            lineHeight: 1.1, color: "#f8fafc", marginBottom: 16,
           }}>
             WhatsApp Link Generator
           </h1>
-          <p style={{ color: "#94a3b8", fontSize: 18, maxWidth: 620, margin: "0 auto 16px", lineHeight: 1.75 }}>
+
+          <p style={{
+            color: "#94a3b8",
+            fontSize: isMobile ? 14 : 18,
+            maxWidth: 620, margin: "0 auto 12px", lineHeight: 1.75,
+          }}>
             Generate WhatsApp click-to-chat links with pre-filled messages, QR codes,
             UTM tracking and AI message suggestions — instantly, for free.
           </p>
-          <p style={{ color: "#64748b", fontSize: 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
-            Used by Indian ecommerce sellers and small businesses to connect with
-            customers on WhatsApp directly from Instagram bio, website, packaging and email.
-          </p>
+
+          {!isMobile && (
+            <p style={{ color: "#64748b", fontSize: 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
+              Used by Indian ecommerce sellers and small businesses to connect with
+              customers on WhatsApp directly from Instagram bio, website, packaging and email.
+            </p>
+          )}
+
+          {/* Stats bar */}
           <div style={{
-            display: "flex", justifyContent: "center", gap: 0, flexWrap: "wrap",
-            borderTop: "1px solid rgba(53,208,178,0.15)", paddingTop: 28,
+            display: "flex", justifyContent: "center", gap: 0,
+            flexWrap: isMobile ? "wrap" : "nowrap",
+            borderTop: "1px solid rgba(53,208,178,0.15)",
+            paddingTop: 24, marginTop: isMobile ? 20 : 0,
           }}>
             {[["wa.me Links", "Instant Generation"], ["QR Code", "Download PNG"], ["UTM Tracking", "Campaign Ready"], ["100% Free", "No Sign-up Needed"]].map(([n, l], i) => (
-              <div key={l} style={{ textAlign: "center", padding: "0 28px", borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none" }}>
-                <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
-                <div style={{ fontSize: 12, color: "#64748b" }}>{l}</div>
+              <div key={l} style={{
+                textAlign: "center",
+                padding: isMobile ? "8px 16px" : "0 28px",
+                borderRight: isMobile ? "none" : (i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none"),
+                width: isMobile ? "50%" : "auto",
+                marginBottom: isMobile ? 8 : 0,
+              }}>
+                <div style={{ fontSize: isMobile ? 13 : 15, fontWeight: 800, color: "#35d0b2", marginBottom: 2 }}>{n}</div>
+                <div style={{ fontSize: 11, color: "#64748b" }}>{l}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48 }}>
+      {/* ── MAIN CONTENT ── */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: outerPad }}>
+
+        {/* Two column → single column on mobile */}
+        <div style={{
+          display: "grid",
+          gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
+          gap: 20,
+          marginTop: 24,
+          paddingBottom: 48,
+        }}>
 
           {/* LEFT: Form */}
           <div style={{
@@ -235,16 +279,16 @@ function WhatsAppLinkGenerator() {
                       border: `1.5px solid ${inputs.linkType === t ? "#35d0b2" : "#e2e8f0"}`,
                       background: inputs.linkType === t ? "#35d0b2" : "#fff",
                       color: inputs.linkType === t ? "#030a10" : "#64748b",
-                      fontWeight: 600, fontSize: 13, fontFamily: "'Poppins', sans-serif",
-                      transition: "all 0.15s",
+                      fontWeight: 600, fontSize: isMobile ? 11 : 13,
+                      fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
                     }}>{t}</button>
                   ))}
                 </div>
               </div>
 
-              {/* Country Code + Phone — hidden for Group */}
+              {/* Country Code + Phone */}
               {inputs.linkType !== "Group" && (
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1.5fr", gap: 12 }}>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Country Code</label>
                     <select value={inputs.countryCode} onChange={(e) => set("countryCode", e.target.value)} style={{
@@ -267,7 +311,7 @@ function WhatsAppLinkGenerator() {
                       style={{
                         padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                         fontSize: 13, background: "#fff", outline: "none",
-                        fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                        fontFamily: "'Poppins', sans-serif", color: "#0f172a", width: "100%", boxSizing: "border-box",
                       }}
                       onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                       onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -277,7 +321,7 @@ function WhatsAppLinkGenerator() {
                 </div>
               )}
 
-              {/* Group Name — only show for Group */}
+              {/* Group Name */}
               {inputs.linkType === "Group" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Group Name *</label>
@@ -286,7 +330,7 @@ function WhatsAppLinkGenerator() {
                     style={{
                       padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                       fontSize: 13, background: "#fff", outline: "none",
-                      fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                      fontFamily: "'Poppins', sans-serif", color: "#0f172a", width: "100%", boxSizing: "border-box",
                     }}
                     onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                     onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -295,7 +339,7 @@ function WhatsAppLinkGenerator() {
                 </div>
               )}
 
-              {/* Business Name — only show for Business type */}
+              {/* Business Name */}
               {inputs.linkType === "Business" && (
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Business Name (optional)</label>
@@ -304,7 +348,7 @@ function WhatsAppLinkGenerator() {
                     style={{
                       padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                       fontSize: 13, background: "#fff", outline: "none",
-                      fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                      fontFamily: "'Poppins', sans-serif", color: "#0f172a", width: "100%", boxSizing: "border-box",
                     }}
                     onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                     onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -328,7 +372,7 @@ function WhatsAppLinkGenerator() {
                       background: inputs.messageTemplate === t.id ? "rgba(53,208,178,0.08)" : "#fff",
                       textAlign: "left", fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
                     }}>
-                      <span style={{ fontSize: 20 }}>{t.icon}</span>
+                      <span style={{ fontSize: 18 }}>{t.icon}</span>
                       <div style={{ flex: 1 }}>
                         <div style={{ fontSize: 13, fontWeight: 700, color: inputs.messageTemplate === t.id ? "#35d0b2" : "#0f172a" }}>{t.label}</div>
                         <div style={{ fontSize: 11, color: "#94a3b8" }}>{t.desc}</div>
@@ -348,7 +392,7 @@ function WhatsAppLinkGenerator() {
                   style={{
                     padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                     fontSize: 13, background: "#fff", outline: "none", resize: "vertical",
-                    fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                    fontFamily: "'Poppins', sans-serif", color: "#0f172a", width: "100%", boxSizing: "border-box",
                   }}
                   onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                   onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -372,9 +416,9 @@ function WhatsAppLinkGenerator() {
                   <span style={{ fontSize: 16, color: "#94a3b8", transform: utmExpanded ? "rotate(180deg)" : "", transition: "transform 0.2s" }}>▾</span>
                 </button>
                 {utmExpanded && (
-                  <div style={{ padding: "0 16px 16px", display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
+                  <div style={{ padding: "0 16px 16px", display: "flex", flexDirection: "column", gap: 12 }}>
                     {[
-                      { key: "utmSource", label: "UTM Source", placeholder: "instagram", hint: "Where traffic comes from (instagram, facebook, website)" },
+                      { key: "utmSource", label: "UTM Source", placeholder: "instagram", hint: "Where traffic comes from" },
                       { key: "utmMedium", label: "UTM Medium", placeholder: "bio", hint: "Marketing medium (bio, story, post, email)" },
                       { key: "utmCampaign", label: "UTM Campaign", placeholder: "summer_sale_2025", hint: "Campaign name for tracking" },
                     ].map(({ key, label, placeholder, hint }) => (
@@ -386,6 +430,7 @@ function WhatsAppLinkGenerator() {
                             padding: "9px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                             fontSize: 13, background: "#fff", outline: "none",
                             fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                            width: "100%", boxSizing: "border-box",
                           }}
                           onFocus={(e) => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                           onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -407,7 +452,7 @@ function WhatsAppLinkGenerator() {
                   <button onClick={() => set("multiMode", !inputs.multiMode)} style={{
                     width: 44, height: 24, borderRadius: 100,
                     background: inputs.multiMode ? "#35d0b2" : "#e2e8f0",
-                    border: "none", cursor: "pointer", position: "relative", transition: "background 0.2s",
+                    border: "none", cursor: "pointer", position: "relative", transition: "background 0.2s", flexShrink: 0,
                   }}>
                     <div style={{
                       position: "absolute", top: 2, left: inputs.multiMode ? 22 : 2,
@@ -432,6 +477,7 @@ function WhatsAppLinkGenerator() {
                             padding: "8px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,
                             fontSize: 12, background: "#fff", outline: "none",
                             fontFamily: "'Poppins', sans-serif", color: "#0f172a",
+                            width: "100%", boxSizing: "border-box",
                           }}
                           onFocus={(e) => { e.target.style.borderColor = "#2563eb"; }}
                           onBlur={(e) => { e.target.style.borderColor = "#e2e8f0"; }}
@@ -460,7 +506,6 @@ function WhatsAppLinkGenerator() {
                 }}>wa.me</div>
               </div>
 
-              {/* Link box */}
               <div style={{
                 background: "#0f172a", borderRadius: 12, padding: "14px 16px", marginBottom: 16,
                 wordBreak: "break-all", fontFamily: "'JetBrains Mono', monospace",
@@ -469,13 +514,13 @@ function WhatsAppLinkGenerator() {
                 {isValidPhone ? generatedLink : "https://wa.me/ — enter phone number to generate"}
               </div>
 
-              {/* Action buttons */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
                 <button onClick={copyLink} disabled={!isValidPhone} style={{
                   background: isValidPhone ? "#35d0b2" : "#f1f5f9",
                   color: isValidPhone ? "#030a10" : "#94a3b8",
-                  border: "none", padding: "10px 8px", borderRadius: 8,
-                  fontSize: 12, fontWeight: 700, cursor: isValidPhone ? "pointer" : "default",
+                  border: "none", padding: "10px 4px", borderRadius: 8,
+                  fontSize: isMobile ? 11 : 12, fontWeight: 700,
+                  cursor: isValidPhone ? "pointer" : "default",
                   fontFamily: "'Poppins', sans-serif",
                 }}>
                   {copied ? "✅ Copied!" : "📋 Copy Link"}
@@ -484,8 +529,9 @@ function WhatsAppLinkGenerator() {
                   disabled={!isValidPhone} style={{
                     background: isValidPhone ? "#25d366" : "#f1f5f9",
                     color: isValidPhone ? "#fff" : "#94a3b8",
-                    border: "none", padding: "10px 8px", borderRadius: 8,
-                    fontSize: 12, fontWeight: 700, cursor: isValidPhone ? "pointer" : "default",
+                    border: "none", padding: "10px 4px", borderRadius: 8,
+                    fontSize: isMobile ? 11 : 12, fontWeight: 700,
+                    cursor: isValidPhone ? "pointer" : "default",
                     fontFamily: "'Poppins', sans-serif",
                   }}>
                   💬 Open WA
@@ -494,8 +540,9 @@ function WhatsAppLinkGenerator() {
                   background: isValidPhone ? "#eff6ff" : "#f1f5f9",
                   color: isValidPhone ? "#2563eb" : "#94a3b8",
                   border: `1px solid ${isValidPhone ? "#bfdbfe" : "#e2e8f0"}`,
-                  padding: "10px 8px", borderRadius: 8,
-                  fontSize: 12, fontWeight: 700, cursor: isValidPhone ? "pointer" : "default",
+                  padding: "10px 4px", borderRadius: 8,
+                  fontSize: isMobile ? 11 : 12, fontWeight: 700,
+                  cursor: isValidPhone ? "pointer" : "default",
                   fontFamily: "'Poppins', sans-serif",
                 }}>
                   {copiedMarkdown ? "✅ Copied!" : "📝 Markdown"}
@@ -530,7 +577,7 @@ function WhatsAppLinkGenerator() {
                   ].map(([l, v]) => (
                     <div key={l} style={{ display: "flex", justifyContent: "space-between", fontSize: 12, padding: "4px 0", borderBottom: "1px solid #f1f5f9" }}>
                       <span style={{ color: "#64748b" }}>{l}</span>
-                      <span style={{ color: "#0f172a", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace" }}>{v}</span>
+                      <span style={{ color: "#0f172a", fontWeight: 600, fontFamily: "'JetBrains Mono', monospace", wordBreak: "break-all" }}>{v}</span>
                     </div>
                   ))}
                 </div>
@@ -549,9 +596,7 @@ function WhatsAppLinkGenerator() {
                     background: "#35d0b2", color: "#030a10", border: "none",
                     padding: "10px 20px", borderRadius: 8, fontSize: 13,
                     fontWeight: 700, cursor: "pointer", fontFamily: "'Poppins', sans-serif",
-                  }}>
-                    ⬇️ Download PNG
-                  </button>
+                  }}>⬇️ Download PNG</button>
                   <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>Scan with any camera app</p>
                 </>
               ) : (
@@ -591,11 +636,11 @@ function WhatsAppLinkGenerator() {
               display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18,
             }}>🤖</div>
             <div>
-              <h2 style={{ fontWeight: 800, fontSize: 18, color: "#0f172a" }}>AI Message Suggestions</h2>
+              <h2 style={{ fontWeight: 800, fontSize: isMobile ? 16 : 18, color: "#0f172a" }}>AI Message Suggestions</h2>
               <p style={{ color: "#64748b", fontSize: 13 }}>Smart pre-filled messages for your business</p>
             </div>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(260px,1fr))", gap: 14 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill,minmax(260px,1fr))", gap: 14 }}>
             {aiSuggestions.map((s, i) => (
               <div key={i} style={{
                 background: "#fff", border: "1px solid #e8ecf0", borderRadius: 12, padding: "16px",
@@ -611,35 +656,33 @@ function WhatsAppLinkGenerator() {
                   borderRadius: 6, padding: "5px 12px", cursor: "pointer",
                   fontSize: 12, fontWeight: 600, color: "#35d0b2",
                   fontFamily: "'Poppins', sans-serif",
-                }}>
-                  Use This
-                </button>
+                }}>Use This</button>
               </div>
             ))}
           </div>
         </div>
 
         {/* How It Works */}
-        <div style={{ background: "#ffffff", borderRadius: 16, padding: "48px 40px", marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, padding: sectionPad, marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 20 : 48, alignItems: "start" }}>
             <div>
               <div style={{
                 display: "inline-block", background: "rgba(53,208,178,0.1)",
                 border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,
-                padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 600, marginBottom: 16,
+                padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 600, marginBottom: 12,
               }}>How It Works</div>
-              <h2 style={{ fontSize: 26, fontWeight: 800, letterSpacing: "-0.8px", lineHeight: 1.3, color: "#0f172a" }}>
+              <h2 style={{ fontSize: isMobile ? 20 : 26, fontWeight: 800, letterSpacing: "-0.8px", lineHeight: 1.3, color: "#0f172a" }}>
                 How to Create Your WhatsApp Link in Seconds
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
               {[
                 ["Step 1 — Enter your number", "Add your WhatsApp number with country code so the link connects directly to your chat."],
                 ["Step 2 — Write your message", "Add a pre-filled message so customers know exactly what to say when they contact you."],
                 ["Step 3 — Add UTM tracking", "Optionally add UTM parameters to track which campaigns are driving WhatsApp conversations."],
                 ["Step 4 — Copy & share", "Copy the link and add it to your website, Instagram bio, Facebook page or email signature."],
               ].map(([title, desc]) => (
-                <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "18px", border: "1px solid #e8ecf0" }}>
+                <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "16px", border: "1px solid #e8ecf0" }}>
                   <div style={{
                     width: 28, height: 28, borderRadius: "50%", background: "#35d0b2",
                     display: "flex", alignItems: "center", justifyContent: "center",
@@ -656,10 +699,10 @@ function WhatsAppLinkGenerator() {
         </div>
 
         {/* Where to Use */}
-        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "32px", marginBottom: 32, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-          <h2 style={{ fontWeight: 800, fontSize: 22, color: "#0f172a", marginBottom: 8 }}>Where to Use Your WhatsApp Link</h2>
+        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: sectionPad, marginBottom: 32, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+          <h2 style={{ fontWeight: 800, fontSize: isMobile ? 18 : 22, color: "#0f172a", marginBottom: 8 }}>Where to Use Your WhatsApp Link</h2>
           <p style={{ color: "#64748b", fontSize: 14, marginBottom: 24 }}>Add your link anywhere customers can find you</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: 16 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill,minmax(200px,1fr))", gap: 14 }}>
             {[
               { icon: "📸", title: "Instagram Bio", desc: "Add in your profile link for instant customer chats", color: "#e1306c", bg: "#fdf2f8" },
               { icon: "🌐", title: "Website", desc: "Add a floating WhatsApp button on your store", color: "#2563eb", bg: "#eff6ff" },
@@ -670,28 +713,28 @@ function WhatsAppLinkGenerator() {
             ].map((item) => (
               <div key={item.title} style={{
                 background: item.bg, border: `1px solid ${item.color}22`,
-                borderRadius: 12, padding: "18px", textAlign: "center",
+                borderRadius: 12, padding: isMobile ? "14px" : "18px", textAlign: "center",
                 transition: "all 0.2s",
               }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = item.color; e.currentTarget.style.transform = "translateY(-2px)"; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${item.color}22`; e.currentTarget.style.transform = "none"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.borderColor = item.color; }}
+                onMouseLeave={(e) => { e.currentTarget.style.borderColor = `${item.color}22`; }}
               >
-                <div style={{ fontSize: 28, marginBottom: 8 }}>{item.icon}</div>
-                <div style={{ fontWeight: 700, fontSize: 14, color: item.color, marginBottom: 6 }}>{item.title}</div>
-                <div style={{ fontSize: 12, color: "#64748b", lineHeight: 1.5 }}>{item.desc}</div>
+                <div style={{ fontSize: isMobile ? 22 : 28, marginBottom: 8 }}>{item.icon}</div>
+                <div style={{ fontWeight: 700, fontSize: isMobile ? 12 : 14, color: item.color, marginBottom: 4 }}>{item.title}</div>
+                <div style={{ fontSize: isMobile ? 11 : 12, color: "#64748b", lineHeight: 1.5 }}>{item.desc}</div>
               </div>
             ))}
           </div>
         </div>
 
         {/* FAQ */}
-        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "32px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: sectionPad, marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
           <div style={{
             display: "inline-block", background: "rgba(53,208,178,0.1)",
             border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,
             padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 600, marginBottom: 16,
           }}>FAQ</div>
-          <h2 style={{ fontWeight: 800, fontSize: 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
+          <h2 style={{ fontWeight: 800, fontSize: isMobile ? 18 : 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
           {[
             ["What is a WhatsApp link?", "A WhatsApp link (wa.me link) lets anyone start a WhatsApp chat with you in one click — without saving your number. It's perfect for businesses, sellers and creators."],
             ["What is a pre-filled message?", "A pre-filled message appears automatically typed in the chat when someone opens your link. It saves the customer time and helps you understand why they're reaching out."],

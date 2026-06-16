@@ -101,7 +101,14 @@ function UTMBuilder() {
   const [copied, setCopied] = useState(false);
   const [copiedParams, setCopiedParams] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState("");
-  
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const [bulkUrls, setBulkUrls] = useState("");
   const [history, setHistory] = useState(() => {
     try { return JSON.parse(localStorage.getItem("utm_history") || "[]"); } catch { return []; }
@@ -216,7 +223,7 @@ function UTMBuilder() {
 
       {/* Hero */}
       <section style={{
-        background: "#030a10", padding: "80px 24px 90px",
+        background: "#030a10", padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center", position: "relative", overflow: "hidden",
       }}>
         <div style={{
@@ -236,7 +243,7 @@ function UTMBuilder() {
             Track Every Click. Optimize Every Campaign.
           </p>
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)", fontWeight: 900,
+            fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 72px)", fontWeight: 900,
             letterSpacing: "-2px", lineHeight: 1.1, color: "#f8fafc", marginBottom: 20,
           }}>
             UTM Campaign URL Builder
@@ -259,7 +266,7 @@ function UTMBuilder() {
               ["Bulk Generator", "Multiple URLs"],
               ["QR Code", "Download Free"],
             ].map(([n, l], i) => (
-              <div key={l} style={{ textAlign: "center", padding: "0 28px", borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none" }}>
+              <div key={l} style={{ textAlign: "center", padding: isMobile ? "0 10px" : "0 28px", borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none" }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
                 <div style={{ fontSize: 12, color: "#64748b" }}>{l}</div>
               </div>
@@ -268,7 +275,7 @@ function UTMBuilder() {
         </div>
       </section>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
 
         {/* Tab bar */}
         <div style={{ display: "flex", gap: 8, marginTop: 24, marginBottom: 0 }}>
@@ -286,7 +293,7 @@ function UTMBuilder() {
 
         {/* BUILDER TAB */}
         {activeTab === "builder" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, paddingBottom: 48 }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 24, paddingBottom: 48 }}>
 
             {/* LEFT: Form */}
             <div style={{
@@ -595,7 +602,7 @@ function UTMBuilder() {
           <div style={{ background: "#fff", borderRadius: "0 16px 16px 16px", border: "1px solid #e8ecf0", padding: "28px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <h2 style={{ fontWeight: 700, fontSize: 18, color: "#0f172a", marginBottom: 6 }}>Bulk UTM Generator</h2>
             <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Paste up to 10 URLs (one per line) — UTM parameters from the Builder tab will be applied to all</p>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               <div>
                 <label style={labelStyle}>Input URLs (one per line)</label>
                 <textarea value={bulkUrls} onChange={(e) => setBulkUrls(e.target.value)}
@@ -716,8 +723,8 @@ function UTMBuilder() {
         )}
 
         {/* How It Works */}
-        <div style={{ background: "#ffffff", borderRadius: 16, padding: "48px 40px", marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, padding: isMobile ? "24px 16px" : "48px 40px", marginBottom: 32, border: "1px solid #e8ecf0", boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 48, alignItems: "start" }}>
             <div>
               <div style={{
                 display: "inline-block", background: "rgba(53,208,178,0.1)",
@@ -728,7 +735,7 @@ function UTMBuilder() {
                 How to Build Your UTM Campaign URL
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
                 ["Step 1 — Choose a platform preset", "Click a platform button (Google, Facebook, Instagram etc.) to auto-fill Source and Medium in one click."],
                 ["Step 2 — Enter your URL", "Paste the landing page URL you want to track — the page customers will land on after clicking your link."],
@@ -752,7 +759,7 @@ function UTMBuilder() {
         </div>
 
         {/* FAQ */}
-        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "32px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
+        <div style={{ background: "#ffffff", borderRadius: 16, border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "32px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
           <div style={{
             display: "inline-block", background: "rgba(53,208,178,0.1)",
             border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,

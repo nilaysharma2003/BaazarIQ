@@ -347,6 +347,13 @@ function MarketplaceCommission() {
     gstPct: "18",
   });
   const [copied, setCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const set = useCallback((k, v) => {
     setInputs((prev) => {
@@ -418,7 +425,7 @@ function MarketplaceCommission() {
       <section
         style={{
           background: "#030a10",
-          padding: "80px 24px 90px",
+          padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
           textAlign: "center",
           position: "relative",
           overflow: "hidden",
@@ -471,7 +478,7 @@ function MarketplaceCommission() {
           {/* Main Heading */}
           <h1
             style={{
-              fontSize: "clamp(42px, 6vw, 58px)",
+              fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 58px)",
               fontWeight: 900,
               letterSpacing: "-2px",
               lineHeight: 1.15,
@@ -531,7 +538,7 @@ function MarketplaceCommission() {
                 key={l}
                 style={{
                   textAlign: "center",
-                  padding: "0 28px",
+                  padding: isMobile ? "0 12px" : "0 28px",
                   borderRight:
                     i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none",
                 }}
@@ -605,14 +612,14 @@ function MarketplaceCommission() {
       </div>
 
       {/* Main */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
         {/* Input Form */}
         <div
           style={{
             background: "#fff",
             borderRadius: 16,
             border: "1px solid #e2e8f0",
-            padding: "28px",
+            padding: isMobile ? "16px" : "28px",
             marginTop: 24,
             marginBottom: 24,
             boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
@@ -698,8 +705,8 @@ function MarketplaceCommission() {
             <div
               style={{
                 display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
-                gap: 24,
+                gridTemplateColumns: isMobile ? "1fr" : "repeat(auto-fill, minmax(250px, 1fr))",
+                gap: isMobile ? 16 : 24,
                 marginBottom: 32,
                 paddingTop: 16,
               }}
@@ -880,7 +887,7 @@ function MarketplaceCommission() {
               >
                 Visual breakdown across all platforms
               </p>
-              <ResponsiveContainer width="100%" height={280}>
+              <ResponsiveContainer width="100%" height={isMobile ? 220 : 280}>
                 <BarChart
                   data={chartData}
                   margin={{ top: 5, right: 20, left: 0, bottom: 5 }}
@@ -1056,7 +1063,7 @@ function MarketplaceCommission() {
             background: "#fff",
             borderRadius: 16,
             border: "1px solid #e2e8f0",
-            padding: "32px",
+            padding: isMobile ? "20px 16px" : "32px",
             marginBottom: 48,
           }}
         >

@@ -171,6 +171,14 @@ function ShippingCalculator() {
     selectedCourier: "All", codEnabled: false, codAmount: "",
   });
 
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const set = useCallback((k, v) => {
     setInputs((prev) => {
       if (prev[k] === v) return prev;
@@ -208,7 +216,7 @@ function ShippingCalculator() {
       {/* Hero — BIGGER like FBA Calculator */}
       <section style={{
         background: "#030a10",
-        padding: "80px 24px 90px",
+        padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
@@ -238,7 +246,7 @@ function ShippingCalculator() {
 
           {/* Main heading */}
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)",
+            fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 72px)",
             fontWeight: 900, letterSpacing: "-2px",
             lineHeight: 1.1, color: "#f8fafc", marginBottom: 20,
           }}>
@@ -276,7 +284,7 @@ function ShippingCalculator() {
               ["COD Charges", "Included"],
             ].map(([n, l], i) => (
               <div key={l} style={{
-                textAlign: "center", padding: "0 28px",
+                textAlign: "center", padding: isMobile ? "0 10px" : "0 28px",
                 borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none",
               }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
@@ -287,8 +295,8 @@ function ShippingCalculator() {
         </div>
       </section>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48 }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48 }}>
 
           {/* LEFT: Form */}
           <div style={{
@@ -311,7 +319,7 @@ function ShippingCalculator() {
             <div style={{ padding: "24px", display: "flex", flexDirection: "column", gap: 16 }}>
               <div style={{ background: "#f8fafc", borderRadius: 10, padding: "16px", border: "1px solid #e2e8f0" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#374151", marginBottom: 12 }}>📦 Package Dimensions</div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "1fr 1fr", gap: 12 }}>
                   <InputField label="Actual Weight" value={inputs.actualWeight} onChange={(v) => set("actualWeight", v)} suffix="kg" placeholder="0.5" hint="Dead weight of package"/>
                   <InputField label="Length" value={inputs.length} onChange={(v) => set("length", v)} suffix="cm" placeholder="30"/>
                   <InputField label="Width" value={inputs.width} onChange={(v) => set("width", v)} suffix="cm" placeholder="20"/>
@@ -325,7 +333,7 @@ function ShippingCalculator() {
 
               <div style={{ background: "#f8fafc", borderRadius: 10, padding: "16px", border: "1px solid #e2e8f0" }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: "#374151", marginBottom: 12 }}>🗺️ Delivery Details</div>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 12 }}>
                   <InputField label="Pickup Pincode" value={inputs.pickupPin} onChange={(v) => set("pickupPin", v)} placeholder="110001" hint="Your warehouse pincode"/>
                   <InputField label="Delivery Pincode" value={inputs.deliveryPin} onChange={(v) => set("deliveryPin", v)} placeholder="400001" hint="Customer pincode"/>
                 </div>
@@ -412,7 +420,7 @@ function ShippingCalculator() {
 
             {hasEnough ? (
               <>
-                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 }}>
+                <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr 1fr", gap: 10 }}>
                   {[
                     { label: "Actual Weight", value: `${actual.toFixed(2)} kg`, color: "#2563eb", bg: "#eff6ff" },
                     { label: "Volumetric Wt", value: `${volumetric.toFixed(2)} kg`, color: "#f97316", bg: "#fff7ed" },
@@ -442,7 +450,7 @@ function ShippingCalculator() {
 
         {/* Chart */}
         {hasEnough && chartData.length > 0 && (
-          <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: "24px", marginBottom: 32 }}>
+          <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: isMobile ? "16px" : "24px", marginBottom: 32 }}>
             <h2 style={{ fontWeight: 700, fontSize: 17, marginBottom: 4, color: "#0f172a" }}>Courier Cost Comparison</h2>
             <p style={{ color: "#94a3b8", fontSize: 13, marginBottom: 20 }}>Shipping cost breakdown across all couriers</p>
             <ResponsiveContainer width="100%" height={260}>
@@ -497,7 +505,7 @@ function ShippingCalculator() {
         )}
 
         {/* FAQ */}
-        <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: "32px", marginBottom: 48 }}>
+        <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e2e8f0", padding: isMobile ? "20px 16px" : "32px", marginBottom: 48 }}>
           <div style={{
             display: "inline-block", background: "rgba(53,208,178,0.1)",
             border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100,

@@ -231,6 +231,13 @@ function BarcodeGenerator() {
   const [bulkMode, setBulkMode] = useState(false);
   const [bulkList, setBulkList] = useState([]);
   const [copied, setCopied] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const set = useCallback((k, v) => {
     setInputs((prev) => {
@@ -316,7 +323,7 @@ function BarcodeGenerator() {
       {/* ✅ UPDATED HERO — matches FBA Calculator style */}
       <section style={{
         background: "#030a10",
-        padding: "80px 24px 90px",
+        padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
@@ -350,7 +357,7 @@ function BarcodeGenerator() {
 
           {/* Main Heading */}
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)",
+            fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 72px)",
             fontWeight: 900,
             letterSpacing: "-2px",
             lineHeight: 1.1,
@@ -395,7 +402,7 @@ function BarcodeGenerator() {
               ["100% Free", "No Sign-up Needed"],
             ].map(([n, l], i) => (
               <div key={l} style={{
-                textAlign: "center", padding: "0 28px",
+                textAlign: "center", padding: isMobile ? "0 10px" : "0 28px",
                 borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none",
               }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
@@ -407,8 +414,8 @@ function BarcodeGenerator() {
       </section>
 
       {/* Main */}
-      <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 32px" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48 }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
+        <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 24, marginTop: 24, paddingBottom: 48 }}>
 
           {/* LEFT: Form */}
           <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e8ecf0", overflow: "hidden", boxShadow: "0 8px 32px rgba(0,0,0,0.08)" }}>
@@ -596,7 +603,7 @@ function BarcodeGenerator() {
         )}
 
         {/* Barcode type guide */}
-        <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e8ecf0", padding: "36px", marginBottom: 32 }}>
+        <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "36px", marginBottom: 32 }}>
           <div style={{ display: "inline-block", background: "rgba(53,208,178,0.1)", border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100, padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.4px" }}>Guide</div>
           <h2 style={{ fontWeight: 900, fontSize: 24, marginBottom: 8, color: "#0f172a", letterSpacing: "-0.5px" }}>Which Barcode Type Should I Use?</h2>
           <p style={{ color: "#64748b", fontSize: 14, marginBottom: 24 }}>Quick guide to choosing the right format for your product</p>
@@ -618,7 +625,7 @@ function BarcodeGenerator() {
         </div>
 
         {/* FAQ */}
-        <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e8ecf0", padding: "40px", marginBottom: 48 }}>
+        <div style={{ background: "#fff", borderRadius: 20, border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "40px", marginBottom: 48 }}>
           <div style={{ display: "inline-block", background: "rgba(53,208,178,0.1)", border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100, padding: "4px 14px", color: "#35d0b2", fontSize: 12, fontWeight: 700, marginBottom: 14, textTransform: "uppercase", letterSpacing: "0.4px" }}>FAQ</div>
           <h2 style={{ fontWeight: 900, fontSize: 24, marginBottom: 24, color: "#0f172a", letterSpacing: "-0.5px" }}>Frequently Asked Questions</h2>
           {[

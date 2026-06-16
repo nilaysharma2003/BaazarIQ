@@ -31,6 +31,13 @@ function AmazonFBACalculator() {
     shippingMethod: "Amazon FBA", area: "Local", stepLevel: "Basic",
   });
   const [copied, setCopied] = useState(false);
+  const [isMobile, setIsMobile] = React.useState(window.innerWidth <= 768);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const set = (k, v) => setInputs((prev) => ({ ...prev, [k]: v }));
 
@@ -82,7 +89,7 @@ Margin: ${results.margin.toFixed(1)}%`;
       {/* Hero — dark #030a10 BIGGER */}
       <section style={{
         background: "#030a10",
-        padding: "80px 24px 90px",
+        padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
         textAlign: "center",
         position: "relative",
         overflow: "hidden",
@@ -112,7 +119,7 @@ Margin: ${results.margin.toFixed(1)}%`;
 
           {/* Main heading */}
           <h1 style={{
-            fontSize: "clamp(42px, 6vw, 72px)",
+            fontSize: isMobile ? "28px" : "clamp(42px, 6vw, 72px)",
             fontWeight: 900,
             letterSpacing: "-2px",
             lineHeight: 1.1,
@@ -156,7 +163,7 @@ Margin: ${results.margin.toFixed(1)}%`;
               ["AI Insights", "Included Free"],
             ].map(([n, l], i) => (
               <div key={l} style={{
-                textAlign: "center", padding: "0 28px",
+                textAlign: "center", padding: isMobile ? "0 10px" : "0 28px",
                 borderRight: i < 3 ? "1px solid rgba(53,208,178,0.15)" : "none",
               }}>
                 <div style={{ fontSize: 15, fontWeight: 800, color: "#35d0b2", marginBottom: 3 }}>{n}</div>
@@ -168,9 +175,9 @@ Margin: ${results.margin.toFixed(1)}%`;
       </section>
 
       {/* Main Content */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: isMobile ? "0 16px" : "0 24px" }}>
         <div style={{
-          display: "grid", gridTemplateColumns: "1fr 1fr",
+          display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr",
           gap: 24, marginTop: 24, paddingBottom: 48,
         }}>
 
@@ -386,11 +393,11 @@ Margin: ${results.margin.toFixed(1)}%`;
         {/* How It Works */}
         <div style={{
           background: "#ffffff", borderRadius: 16,
-          padding: "48px 40px", marginBottom: 32,
+          padding: isMobile ? "24px 16px" : "48px 40px", marginBottom: 32,
           border: "1px solid #e8ecf0",
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
         }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 48, alignItems: "start" }}>
+          <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 2fr", gap: isMobile ? 24 : 48, alignItems: "start" }}>
             <div>
               <div style={{
                 display: "inline-block",
@@ -405,7 +412,7 @@ Margin: ${results.margin.toFixed(1)}%`;
                 How the Amazon FBA Fee Calculator Works for Sellers
               </h2>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+            <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
                 ["Step 1 — Enter product details", "Add price, cost, and shipping to Amazon so the calculator can estimate your total revenue and base expenses."],
                 ["Step 2 — Select category and specs", "Choose product category and enter size, weight, and dimensions to calculate referral and fulfillment fees."],
@@ -436,7 +443,7 @@ Margin: ${results.margin.toFixed(1)}%`;
         {/* Input Descriptions */}
         <div style={{
           background: "#ffffff", borderRadius: 16,
-          border: "1px solid #e8ecf0", padding: "40px", marginBottom: 32,
+          border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "40px", marginBottom: 32,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
         }}>
           <div style={{ marginBottom: 28 }}>
@@ -489,7 +496,7 @@ Margin: ${results.margin.toFixed(1)}%`;
         {/* FAQ */}
         <div style={{
           background: "#ffffff", borderRadius: 16,
-          border: "1px solid #e8ecf0", padding: "32px", marginBottom: 48,
+          border: "1px solid #e8ecf0", padding: isMobile ? "20px 16px" : "32px", marginBottom: 48,
           boxShadow: "0 2px 8px rgba(0,0,0,0.04)",
         }}>
           <div style={{
