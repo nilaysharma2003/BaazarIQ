@@ -100,7 +100,7 @@ function WhatsAppLinkGenerator() {
 
   const isValidPhone = inputs.linkType === "Group"
     ? !!inputs.groupName
-    : inputs.phoneNumber.replace(/\D/g, "").length >= 10;
+    : inputs.phoneNumber.replace(/\D/g, "").length === 10;
 
   useEffect(() => {
     if (isValidPhone) {
@@ -306,7 +306,7 @@ function WhatsAppLinkGenerator() {
                   </div>
                   <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                     <label style={{ fontSize: 13, fontWeight: 600, color: "#374151" }}>Phone Number</label>
-                    <input type="text" value={inputs.phoneNumber} onChange={(e) => set("phoneNumber", e.target.value)}
+                    <input type="text" value={inputs.phoneNumber} onChange={(e) => set("phoneNumber", e.target.value.replace(/\D/g, "").slice(0, 10))}
                       placeholder="9876543210"
                       style={{
                         padding: "10px 12px", border: "1.5px solid #e2e8f0", borderRadius: 8,

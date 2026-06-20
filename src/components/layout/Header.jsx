@@ -223,6 +223,9 @@ function Header() {
           borderTop: `1px solid ${theme.border}`,
           padding: "16px 24px",
           display: "flex", flexDirection: "column", gap: 4,
+          maxHeight: "calc(100vh - 110px)",
+          overflowY: "auto",
+          WebkitOverflowScrolling: "touch",
         }}>
           <button onClick={() => navigate("/")} style={{
             background: currentPath === "/" ? "rgba(53,208,178,0.15)" : "none",
