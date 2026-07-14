@@ -213,7 +213,7 @@ function ShippingCalculator() {
   return (
     <div style={{ background: "#f1f5f9", minHeight: "100vh", fontFamily: "'Plus Poppins', sans-serif" }}>
 
-      {/* Hero — BIGGER like FBA Calculator */}
+      {/* Hero - BIGGER like FBA Calculator */}
       <section style={{
         background: "#030a10",
         padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
@@ -266,7 +266,7 @@ function ShippingCalculator() {
             maxWidth: 580, margin: "0 auto 32px", lineHeight: 1.75,
           }}>
             Enter your package weight, dimensions and pincodes to instantly
-            compare shipping costs across 6+ couriers — including volumetric
+            compare shipping costs across 6+ couriers - including volumetric
             weight calculation, COD charges and zone-based pricing.
           </p>
 
@@ -515,7 +515,7 @@ function ShippingCalculator() {
             Frequently Asked Questions
           </h2>
           {[
-            ["What is Volumetric Weight?", "Volumetric weight = (L × W × H) / 5000. Couriers charge based on whichever is higher — actual or volumetric. A large but light package may be charged at volumetric weight."],
+            ["What is Volumetric Weight?", "Volumetric weight = (L × W × H) / 5000. Couriers charge based on whichever is higher - actual or volumetric. A large but light package may be charged at volumetric weight."],
             ["What is Chargeable Weight?", "Chargeable weight is the maximum of actual weight and volumetric weight. This is what the courier charges you for."],
             ["What is COD charge?", "Cash on Delivery charge is an extra fee couriers charge for handling cash collection. It's typically a flat fee or a percentage of the order value, whichever is higher."],
             ["Which courier is best for ecommerce?", "Delhivery and XpressBees are most popular for ecommerce due to competitive rates and good coverage. Bluedart is best for high-value or urgent shipments."],

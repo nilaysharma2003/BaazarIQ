@@ -114,7 +114,7 @@ function LabelPreview({ inputs, isMobile }) {
           fontSize: 11 * scale, fontWeight: 800,
           textAlign: "center", letterSpacing: "1px",
         }}>
-          COD: ₹{inputs.codAmount} — COLLECT BEFORE DELIVERY
+          COD: ₹{inputs.codAmount} - COLLECT BEFORE DELIVERY
         </div>
       )}
 
@@ -126,7 +126,7 @@ function LabelPreview({ inputs, isMobile }) {
           fontSize: 10 * scale, fontWeight: 700,
           textAlign: "center", border: `1px solid #fde68a`,
         }}>
-          ⚠️ FRAGILE — HANDLE WITH CARE
+          ⚠️ FRAGILE - HANDLE WITH CARE
         </div>
       )}
 
@@ -329,7 +329,7 @@ function ShippingLabelGenerator() {
     if (inputs.receiverPhone && inputs.receiverPhone.replace(/\D/g, "").length !== 10) warnings.push({ type: "warn", msg: "Receiver phone should be 10 digits" });
     if (inputs.codEnabled && !inputs.codAmount) warnings.push({ type: "warn", msg: "COD is enabled but amount is not entered" });
     if (!inputs.orderId) warnings.push({ type: "info", msg: "Enter Order ID to auto-generate barcode on label" });
-    if (inputs.weight && parseFloat(inputs.weight) > 30) warnings.push({ type: "warn", msg: "Weight above 30kg — verify with courier for heavy shipment charges" });
+    if (inputs.weight && parseFloat(inputs.weight) > 30) warnings.push({ type: "warn", msg: "Weight above 30kg - verify with courier for heavy shipment charges" });
     return warnings;
   };
 
@@ -383,10 +383,10 @@ function ShippingLabelGenerator() {
           </h1>
           <p style={{ color: "#94a3b8", fontSize: isMobile ? 15 : 18, maxWidth: 620, margin: "0 auto 16px", lineHeight: 1.75 }}>
             Generate professional shipping labels with auto barcode, COD badge, courier
-            branding and fragile warnings — print directly from browser or save as PDF, free forever.
+            branding and fragile warnings - print directly from browser or save as PDF, free forever.
           </p>
           <p style={{ color: "#64748b", fontSize: isMobile ? 13 : 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
-            Supports Delhivery, Bluedart, DTDC, XpressBees, Ekart and Shadowfax — with
+            Supports Delhivery, Bluedart, DTDC, XpressBees, Ekart and Shadowfax - with
             live label preview, return label mode and AI validation for every shipment.
           </p>
           <div style={{
@@ -813,7 +813,7 @@ function ShippingLabelGenerator() {
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
                 <div>
                   <h3 style={{ fontWeight: 700, fontSize: 15, color: "#0f172a" }}>Label Preview</h3>
-                  <p style={{ fontSize: 12, color: "#94a3b8" }}>Live preview — updates as you type</p>
+                  <p style={{ fontSize: 12, color: "#94a3b8" }}>Live preview - updates as you type</p>
                 </div>
                 <div style={{
                   background: "rgba(53,208,178,0.1)", border: "1px solid rgba(53,208,178,0.2)",
@@ -893,10 +893,10 @@ function ShippingLabelGenerator() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
-                ["Step 1 — Enter sender details", "Add your business name, full address and phone number so couriers can contact you if needed."],
-                ["Step 2 — Enter receiver details", "Add the customer's complete delivery address including PIN code — this is critical for delivery."],
-                ["Step 3 — Add package details", "Enter weight, dimensions and Order ID. The Order ID auto-generates a scannable barcode."],
-                ["Step 4 — Print or save PDF", "Preview the label, choose your courier, enable COD if needed, then print directly or save as PDF."],
+                ["Step 1 - Enter sender details", "Add your business name, full address and phone number so couriers can contact you if needed."],
+                ["Step 2 - Enter receiver details", "Add the customer's complete delivery address including PIN code - this is critical for delivery."],
+                ["Step 3 - Add package details", "Enter weight, dimensions and Order ID. The Order ID auto-generates a scannable barcode."],
+                ["Step 4 - Print or save PDF", "Preview the label, choose your courier, enable COD if needed, then print directly or save as PDF."],
               ].map(([title, desc]) => (
                 <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "18px", border: "1px solid #e8ecf0" }}>
                   <div style={{
@@ -924,9 +924,9 @@ function ShippingLabelGenerator() {
           <h2 style={{ fontWeight: 800, fontSize: isMobile ? 18 : 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
           {[
             ["What information is required on a shipping label?", "A shipping label must include sender name and address, receiver name and address, PIN codes, phone numbers, and a tracking barcode. COD amount is required for cash on delivery orders."],
-            ["Can I print on regular paper?", "Yes — you can print on A4 plain paper and cut it out. However, thermal label paper (4×6 inch) is recommended for professional shipping as it's waterproof and adhesive."],
+            ["Can I print on regular paper?", "Yes - you can print on A4 plain paper and cut it out. However, thermal label paper (4×6 inch) is recommended for professional shipping as it's waterproof and adhesive."],
             ["What is a return label?", "A return label has the sender and receiver addresses swapped. Use the Return Label toggle to instantly generate one when a customer wants to return a product."],
-            ["How is the barcode generated?", "The barcode is automatically generated from your Order ID using Code 128 format — the same standard used by all major Indian couriers including Delhivery, Bluedart and DTDC."],
+            ["How is the barcode generated?", "The barcode is automatically generated from your Order ID using Code 128 format - the same standard used by all major Indian couriers including Delhivery, Bluedart and DTDC."],
             ["What is COD on a shipping label?", "COD (Cash on Delivery) means the delivery person collects payment from the customer at the time of delivery. The COD amount is displayed prominently on the label so the delivery person knows how much to collect."],
           ].map(([q, a]) => <FAQItem key={q} q={q} a={a} />)}
         </div>

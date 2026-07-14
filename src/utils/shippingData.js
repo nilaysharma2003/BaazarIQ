@@ -244,7 +244,7 @@ export function getShippingInsights({
       type: "success",
       icon: "⚖️",
       title: "Actual Weight is Chargeable",
-      msg: `Good — actual weight (${actual}kg) is higher than volumetric (${volumetric.toFixed(
+      msg: `Good - actual weight (${actual}kg) is higher than volumetric (${volumetric.toFixed(
         2
       )}kg). Your package shape is efficient`,
     });

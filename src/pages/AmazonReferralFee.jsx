@@ -290,7 +290,7 @@ function AmazonReferralFee() {
             <span style={{ color: "#35d0b2", fontSize: 14, fontWeight: 600 }}>Amazon India Fee Lookup</span>
           </div>
           <p style={{ color: "#35d0b2", fontSize: 16, fontWeight: 600, marginBottom: 12, letterSpacing: "0.3px" }}>
-            Updated March 2026 — Zero Referral Fees Expanded to ₹1,000
+            Updated March 2026 - Zero Referral Fees Expanded to ₹1,000
           </p>
           <h1 style={{ fontSize: "clamp(42px, 6vw, 72px)", fontWeight: 900, letterSpacing: "-2px", lineHeight: 1.1, color: "#f8fafc", marginBottom: 20 }}>
             Know Every Fee.{" "}
@@ -299,7 +299,7 @@ function AmazonReferralFee() {
             </span>
           </h1>
           <p style={{ color: "#94a3b8", fontSize: 18, maxWidth: 580, margin: "0 auto 32px", lineHeight: 1.75 }}>
-            Look up referral fees, closing fees, shipping charges and compare FBA vs Easy Ship vs Self Ship — before you list on Amazon India.
+            Look up referral fees, closing fees, shipping charges and compare FBA vs Easy Ship vs Self Ship - before you list on Amazon India.
           </p>
           <div style={{ display: "flex", justifyContent: "center", gap: 0, flexWrap: "wrap", borderTop: "1px solid rgba(53,208,178,0.15)", paddingTop: 28 }}>
             {[["30+ Categories", "All Fee Slabs"], ["FBA vs Easy Ship", "Side by Side"], ["Reverse Calculator", "Target Profit"], ["100% Free", "Updated 2026"]].map(([n, l], i) => (
@@ -315,7 +315,7 @@ function AmazonReferralFee() {
       {/* ── ZERO FEE BANNER ── */}
       <div style={{ background: "linear-gradient(135deg,#035d38,#047857)", padding: "14px 24px", textAlign: "center" }}>
         <p style={{ color: "#fff", fontSize: 14, fontWeight: 600, margin: 0 }}>
-          🎉 <strong>Big Update (March 2026):</strong> Amazon India expanded Zero Referral Fees to products priced under ₹1,000 across 1,800+ categories — 10x expansion!
+          🎉 <strong>Big Update (March 2026):</strong> Amazon India expanded Zero Referral Fees to products priced under ₹1,000 across 1,800+ categories - 10x expansion!
         </p>
       </div>
 
@@ -329,13 +329,13 @@ function AmazonReferralFee() {
             {/* Category Selector */}
             <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", overflow: "hidden", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
               <div style={{ padding: "20px 24px", borderBottom: "1px solid #f1f5f9", background: "#f8fafc" }}>
-                <h2 style={{ fontWeight: 800, fontSize: 17, color: "#0f172a" }}>Step 1 — Select Category</h2>
+                <h2 style={{ fontWeight: 800, fontSize: 17, color: "#0f172a" }}>Step 1 - Select Category</h2>
                 <p style={{ color: "#94a3b8", fontSize: 13, marginTop: 2 }}>Search and select your Amazon product category</p>
               </div>
               <div style={{ padding: "16px 24px" }}>
                 <input
                   type="text" value={categorySearch} onChange={e => setCategorySearch(e.target.value)}
-                  placeholder="🔍 Search category — e.g. fashion, electronics, beauty..."
+                  placeholder="🔍 Search category - e.g. fashion, electronics, beauty..."
                   style={{ width: "100%", padding: "11px 14px", border: "1.5px solid #e2e8f0", borderRadius: 10, fontSize: 14, background: "#fff", color: "#0f172a", outline: "none", fontFamily: "'Plus Poppins', sans-serif", boxSizing: "border-box" }}
                   onFocus={e => { e.target.style.borderColor = "#2563eb"; e.target.style.boxShadow = "0 0 0 3px rgba(37,99,235,0.1)"; }}
                   onBlur={e => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }}
@@ -365,7 +365,7 @@ function AmazonReferralFee() {
 
             {/* Product Details */}
             <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "24px", boxShadow: "0 2px 12px rgba(0,0,0,0.06)" }}>
-              <h2 style={{ fontWeight: 800, fontSize: 16, color: "#0f172a", marginBottom: 16 }}>Step 2 — Product Details</h2>
+              <h2 style={{ fontWeight: 800, fontSize: 16, color: "#0f172a", marginBottom: 16 }}>Step 2 - Product Details</h2>
               <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
                   {[["Selling Price", "sellingPrice", "₹", "999", ""], ["Product Cost", "productCost", "₹", "400", ""]].map(([label, key, prefix, ph]) => (
@@ -446,7 +446,7 @@ function AmazonReferralFee() {
                       onBlur={e => { e.target.style.borderColor = "#e2e8f0"; e.target.style.boxShadow = "none"; }} />
                     <span style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", color: "#64748b", fontSize: 14, fontWeight: 600 }}>%</span>
                   </div>
-                  <span style={{ fontSize: 11, color: "#94a3b8" }}>Advertising Cost of Sales — deducted from profit calculation</span>
+                  <span style={{ fontSize: 11, color: "#94a3b8" }}>Advertising Cost of Sales - deducted from profit calculation</span>
                 </div>
               </div>
             </div>
@@ -508,7 +508,7 @@ function AmazonReferralFee() {
               <>
                 {/* Referral Fee Banner */}
                 <div style={{ background: results.isZeroReferral ? "linear-gradient(135deg,#0a3d20,#166534)" : "linear-gradient(135deg,#0a1628,#1e3a5f)", borderRadius: 16, padding: "24px", color: "#fff", border: `1px solid ${results.isZeroReferral ? "rgba(53,208,178,0.3)" : "rgba(37,99,235,0.2)"}`, boxShadow: "0 4px 20px rgba(0,0,0,0.15)" }}>
-                  <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 4 }}>Referral Fee — {selectedCategory.name}</div>
+                  <div style={{ fontSize: 12, color: "#94a3b8", marginBottom: 4 }}>Referral Fee - {selectedCategory.name}</div>
                   <div style={{ display: "flex", alignItems: "baseline", gap: 12, marginBottom: 12 }}>
                     <div style={{ fontSize: 44, fontWeight: 900, fontFamily: "'JetBrains Mono', monospace", color: results.isZeroReferral ? "#35d0b2" : "#fff" }}>
                       {results.isZeroReferral ? "0%" : `${results.referralPct}%`}
@@ -532,7 +532,7 @@ function AmazonReferralFee() {
                 {/* Fulfillment Comparison */}
                 <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "20px" }}>
                   <h3 style={{ fontWeight: 800, fontSize: 16, color: "#0f172a", marginBottom: 4 }}>Fulfillment Comparison</h3>
-                  <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 16 }}>FBA vs Easy Ship vs Self Ship — choose what's best for you</p>
+                  <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 16 }}>FBA vs Easy Ship vs Self Ship - choose what's best for you</p>
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12 }}>
                     <FulfillmentCard label="Amazon FBA" icon="📦" results={results} field="fba" color="#f97316" bg="#fff7ed" border="#fed7aa" isBest={bestMethod === "fba"} />
                     <FulfillmentCard label="Easy Ship" icon="🚚" results={results} field="es" color="#2563eb" bg="#eff6ff" border="#bfdbfe" isBest={bestMethod === "es"} />
@@ -542,7 +542,7 @@ function AmazonReferralFee() {
 
                 {/* Bar Chart */}
                 <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", padding: "20px" }}>
-                  <h3 style={{ fontWeight: 800, fontSize: 15, color: "#0f172a", marginBottom: 4 }}>Profit vs Fees — All Methods</h3>
+                  <h3 style={{ fontWeight: 800, fontSize: 15, color: "#0f172a", marginBottom: 4 }}>Profit vs Fees - All Methods</h3>
                   <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 14 }}>Visual breakdown across fulfillment options</p>
                   <ResponsiveContainer width="100%" height={200}>
                     <BarChart data={barData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
@@ -642,8 +642,8 @@ function AmazonReferralFee() {
         <div style={{ background: "#fff", borderRadius: 16, border: "1px solid #e8ecf0", overflow: "hidden", marginBottom: 32 }}>
           <div style={{ padding: "22px 28px", borderBottom: "1px solid #f1f5f9", background: "#f8fafc" }}>
             <div style={{ display: "inline-block", background: "rgba(53,208,178,0.1)", border: "1px solid rgba(53,208,178,0.2)", borderRadius: 100, padding: "3px 12px", color: "#35d0b2", fontSize: 11, fontWeight: 700, marginBottom: 8 }}>Fee Reference Table</div>
-            <h2 style={{ fontWeight: 800, fontSize: 20, color: "#0f172a" }}>All Category Referral Fees — Amazon India 2026</h2>
-            <p style={{ color: "#64748b", fontSize: 13, marginTop: 4 }}>Updated March 2026 — Zero fee expanded to products priced ≤₹1,000</p>
+            <h2 style={{ fontWeight: 800, fontSize: 20, color: "#0f172a" }}>All Category Referral Fees - Amazon India 2026</h2>
+            <p style={{ color: "#64748b", fontSize: 13, marginTop: 4 }}>Updated March 2026 - Zero fee expanded to products priced ≤₹1,000</p>
           </div>
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
@@ -669,7 +669,7 @@ function AmazonReferralFee() {
                     </td>
                     <td style={{ padding: "11px 16px", fontWeight: 700, color: "#0f172a", borderBottom: "1px solid #f1f5f9", fontFamily: "'JetBrains Mono', monospace" }}>{cat.referral(1500)}%</td>
                     <td style={{ padding: "11px 16px", borderBottom: "1px solid #f1f5f9" }}>
-                      {cat.highReturn ? <span style={{ background: "#fef2f2", color: "#dc2626", padding: "2px 8px", borderRadius: 100, fontSize: 11, fontWeight: 700 }}>Yes ⚠️</span> : <span style={{ color: "#94a3b8" }}>—</span>}
+                      {cat.highReturn ? <span style={{ background: "#fef2f2", color: "#dc2626", padding: "2px 8px", borderRadius: 100, fontSize: 11, fontWeight: 700 }}>Yes ⚠️</span> : <span style={{ color: "#94a3b8" }}>-</span>}
                     </td>
                     <td style={{ padding: "11px 16px", color: "#374151", borderBottom: "1px solid #f1f5f9", fontFamily: "'JetBrains Mono', monospace" }}>₹{cat.closingFBA(1000)}</td>
                     <td style={{ padding: "11px 16px", color: "#374151", borderBottom: "1px solid #f1f5f9", fontFamily: "'JetBrains Mono', monospace" }}>₹{cat.closingES(1000)}</td>
@@ -692,10 +692,10 @@ function AmazonReferralFee() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
               {[
-                ["Step 1 — Referral Fee", "Amazon charges a % of your selling price depending on category. As of March 2026, products ≤₹1,000 in most categories pay 0%."],
-                ["Step 2 — Closing Fee", "A flat fee per order based on your price slab and fulfillment method. Ranges from ₹5 to ₹100+."],
-                ["Step 3 — Shipping Fee", "Weight handling charges based on actual or volumetric weight (whichever is higher) and delivery zone."],
-                ["Step 4 — Net Profit", "Selling Price − Referral Fee − Closing Fee − Shipping Fee − GST on Fees − Product Cost = Your profit."],
+                ["Step 1 - Referral Fee", "Amazon charges a % of your selling price depending on category. As of March 2026, products ≤₹1,000 in most categories pay 0%."],
+                ["Step 2 - Closing Fee", "A flat fee per order based on your price slab and fulfillment method. Ranges from ₹5 to ₹100+."],
+                ["Step 3 - Shipping Fee", "Weight handling charges based on actual or volumetric weight (whichever is higher) and delivery zone."],
+                ["Step 4 - Net Profit", "Selling Price − Referral Fee − Closing Fee − Shipping Fee − GST on Fees − Product Cost = Your profit."],
               ].map(([title, desc]) => (
                 <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "18px", border: "1px solid #e8ecf0" }}>
                   <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#35d0b2", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#030a10", fontSize: 14, fontWeight: 700 }}>✓</div>
@@ -715,9 +715,9 @@ function AmazonReferralFee() {
           <h2 style={{ fontWeight: 800, fontSize: 24, marginBottom: 24, color: "#0f172a", letterSpacing: "-0.5px" }}>Frequently Asked Questions</h2>
           {[
             ["What is Amazon Referral Fee?", "Referral fee is Amazon's commission for helping you sell on their platform. It's a percentage of your selling price, ranging from 0% to 22% depending on your product category and price."],
-            ["What changed in March 2026?", "Amazon India expanded zero referral fees to products priced under ₹1,000 across 1,800+ categories — a 10x expansion from the previous ₹300 limit. This is a huge benefit for sellers of affordable products."],
-            ["What is the difference between FBA, Easy Ship and Self Ship?", "FBA: Amazon stores and ships — higher fees but Prime badge. Easy Ship: You store, Amazon picks up and delivers — medium fees. Self Ship: You handle everything — lowest Amazon fees but you bear courier costs."],
-            ["What is Volumetric Weight?", "Volumetric weight = (Length × Width × Height) ÷ 5000. Amazon charges based on whichever is higher — actual weight or volumetric weight. A large but light item like a pillow may be charged at 3x its actual weight."],
+            ["What changed in March 2026?", "Amazon India expanded zero referral fees to products priced under ₹1,000 across 1,800+ categories - a 10x expansion from the previous ₹300 limit. This is a huge benefit for sellers of affordable products."],
+            ["What is the difference between FBA, Easy Ship and Self Ship?", "FBA: Amazon stores and ships - higher fees but Prime badge. Easy Ship: You store, Amazon picks up and delivers - medium fees. Self Ship: You handle everything - lowest Amazon fees but you bear courier costs."],
+            ["What is Volumetric Weight?", "Volumetric weight = (Length × Width × Height) ÷ 5000. Amazon charges based on whichever is higher - actual weight or volumetric weight. A large but light item like a pillow may be charged at 3x its actual weight."],
             ["What is Closing Fee?", "A flat fee per order charged in addition to the referral fee. It varies by selling price slab and fulfillment method. FBA closing fees are higher than Easy Ship closing fees."],
             ["What is Refund Administration Fee?", "When a customer returns a product, Amazon refunds your referral fee but deducts approximately 10% of it as a handling charge. This is called the Refund Administration Fee."],
             ["How does the Reverse Calculator work?", "Enter your target profit per unit and your product cost. Our calculator estimates the minimum selling price you need to achieve that profit after all Amazon fees are deducted."],

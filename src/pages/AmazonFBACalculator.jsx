@@ -86,7 +86,7 @@ Margin: ${results.margin.toFixed(1)}%`;
   return (
     <div style={{ background: "#f1f5f9", minHeight: "100vh", fontFamily: "'Plus Poppins', sans-serif" }}>
 
-      {/* Hero — dark #030a10 BIGGER */}
+      {/* Hero - dark #030a10 BIGGER */}
       <section style={{
         background: "#030a10",
         padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
@@ -136,7 +136,7 @@ Margin: ${results.margin.toFixed(1)}%`;
             lineHeight: 1.75,
           }}>
             Calculate your exact net profit before listing on Amazon. Enter your
-            selling price, product cost, weight and category — and instantly see
+            selling price, product cost, weight and category - and instantly see
             referral fees, closing fees, shipping charges, GST and your final
             profit margin.
           </p>
@@ -145,7 +145,7 @@ Margin: ${results.margin.toFixed(1)}%`;
             maxWidth: 560, margin: "0 auto 32px",
             lineHeight: 1.7,
           }}>
-            Supports FBA, Easy Ship, Self Ship and Seller Flex — with AI-powered
+            Supports FBA, Easy Ship, Self Ship and Seller Flex - with AI-powered
             insights to help you price smarter and sell profitably on Amazon India.
           </p>
 
@@ -296,7 +296,7 @@ Margin: ${results.margin.toFixed(1)}%`;
                 fontFamily: "'JetBrains Mono', monospace", letterSpacing: "-1px",
                 color: results.profit >= 0 ? "#35d0b2" : "#ef4444",
               }}>
-                {hasPrice ? `${results.profit >= 0 ? "+" : ""}₹${results.profit.toFixed(2)}` : "₹ —"}
+                {hasPrice ? `${results.profit >= 0 ? "+" : ""}₹${results.profit.toFixed(2)}` : "₹ -"}
               </div>
               {hasPrice && (
                 <div style={{ display: "flex", gap: 16, marginTop: 12, flexWrap: "wrap" }}>
@@ -334,7 +334,7 @@ Margin: ${results.margin.toFixed(1)}%`;
                     fontSize: 18, fontWeight: 800, color,
                     fontFamily: "'JetBrains Mono', monospace",
                   }}>
-                    {hasPrice ? `₹${value.toFixed(2)}` : "₹ —"}
+                    {hasPrice ? `₹${value.toFixed(2)}` : "₹ -"}
                   </div>
                 </div>
               ))}
@@ -414,10 +414,10 @@ Margin: ${results.margin.toFixed(1)}%`;
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
-                ["Step 1 — Enter product details", "Add price, cost, and shipping to Amazon so the calculator can estimate your total revenue and base expenses."],
-                ["Step 2 — Select category and specs", "Choose product category and enter size, weight, and dimensions to calculate referral and fulfillment fees."],
-                ["Step 3 — Add additional costs", "Include storage period, prep fees, taxes, and other costs to reflect your full Amazon expense structure."],
-                ["Step 4 — Review profitability", "Instantly see total fees, net profit, margin, and ROI so you can validate or adjust your pricing strategy."],
+                ["Step 1 - Enter product details", "Add price, cost, and shipping to Amazon so the calculator can estimate your total revenue and base expenses."],
+                ["Step 2 - Select category and specs", "Choose product category and enter size, weight, and dimensions to calculate referral and fulfillment fees."],
+                ["Step 3 - Add additional costs", "Include storage period, prep fees, taxes, and other costs to reflect your full Amazon expense structure."],
+                ["Step 4 - Review profitability", "Instantly see total fees, net profit, margin, and ROI so you can validate or adjust your pricing strategy."],
               ].map(([title, desc]) => (
                 <div key={title} style={{
                   display: "flex", gap: 14,
@@ -457,7 +457,7 @@ Margin: ${results.margin.toFixed(1)}%`;
               Input Guide
             </div>
             <h2 style={{ fontWeight: 800, fontSize: 22, letterSpacing: "-0.5px", marginBottom: 6, color: "#0f172a" }}>
-              Understanding Each Input Field
+              How Each Inputs Works?
             </h2>
             <p style={{ color: "#64748b", fontSize: 14 }}>
               Here's what each field means and how to fill it correctly.
@@ -468,11 +468,11 @@ Margin: ${results.margin.toFixed(1)}%`;
               ["💰", "Selling Price", "#2563eb", "#eff6ff", "The price at which you list your product on Amazon. This is what the customer pays."],
               ["📦", "Product Cost", "#16a34a", "#f0fdf4", "The amount you paid to manufacture or buy the product. Also called COGS (Cost of Goods Sold)."],
               ["⚖️", "Weight (gm)", "#7c3aed", "#faf5ff", "The actual weight of your product in grams. Used to calculate Amazon's fulfillment fee."],
-              ["🚚", "Shipping Method", "#0891b2", "#ecfeff", "How your product ships — FBA (Amazon ships), Easy Ship (Amazon picks up), Self Ship, or Seller Flex."],
+              ["🚚", "Shipping Method", "#0891b2", "#ecfeff", "How your product ships - FBA (Amazon ships), Easy Ship (Amazon picks up), Self Ship, or Seller Flex."],
               ["🗂️", "Category", "#ea580c", "#fff7ed", "The product category on Amazon. Different categories have different referral fee percentages."],
-              ["🪜", "Step Level", "#9333ea", "#faf5ff", "Amazon's fulfillment pricing tier — Basic is standard. Premium and Advanced have higher charges but better service."],
+              ["🪜", "Step Level", "#9333ea", "#faf5ff", "Amazon's fulfillment pricing tier - Basic is standard. Premium and Advanced have higher charges but better service."],
               ["🧾", "GST Percentage", "#d97706", "#fffbeb", "Goods & Services Tax on your product. Common rates are 0%, 5%, 12%, 18% and 28%."],
-              ["📍", "Area", "#16a34a", "#f0fdf4", "Delivery zone — Local, Regional, or National. Affects the shipping fee Amazon charges per order."],
+              ["📍", "Area", "#16a34a", "#f0fdf4", "Delivery zone - Local, Regional, or National. Affects the shipping fee Amazon charges per order."],
               ["🏷️", "Your Shipping Cost", "#2563eb", "#eff6ff", "Any extra packaging or shipping cost you personally bear before Amazon handles the order."],
             ].map(([icon, label, color, bg, desc]) => (
               <div key={label} style={{
@@ -511,7 +511,7 @@ Margin: ${results.margin.toFixed(1)}%`;
           </h2>
           {[
             ["What is Amazon FBA?", "Fulfillment by Amazon (FBA) means Amazon stores, packs, and ships your products. You pay storage + fulfillment fees but get Prime badge and Amazon customer support."],
-            ["How is Referral Fee calculated?", "Referral fee is a percentage of the selling price, varying by category — typically 5% to 20%. Electronics are lower (~8%), Fashion higher (~15%)."],
+            ["How is Referral Fee calculated?", "Referral fee is a percentage of the selling price, varying by category - typically 5% to 20%. Electronics are lower (~8%), Fashion higher (~15%)."],
             ["What is Closing Fee?", "A flat fee charged per item sold, based on the selling price tier. Ranges from ₹14 to ₹40+."],
             ["What is the difference between FBA, Easy Ship and Self Ship?", "FBA means Amazon stores and ships your product. Easy Ship means you store it but Amazon picks it up and delivers. Self Ship means you handle everything yourself."],
             ["What is Step Level?", "Step level refers to Amazon's fulfillment pricing tier. Basic is the standard rate, while Premium and Advanced have slightly higher shipping charges but better service levels."],

@@ -40,7 +40,7 @@ function Home() {
             }}>
               <div style={{ width: 7, height: 7, borderRadius: "50%", background: theme.teal }} />
               <span style={{ fontSize: 12, color: theme.teal, fontWeight: 500 }}>
-                Built for Indian ecommerce sellers — 100% Free
+                Built for Indian ecommerce sellers - 100% Free
               </span>
             </div>
 
@@ -60,7 +60,7 @@ function Home() {
             }}>
               Professional-grade calculators for Amazon, Flipkart, Meesho and
               more. Calculate FBA fees, compare marketplace commissions,
-              estimate shipping costs — all in one place, completely free.
+              estimate shipping costs - all in one place, completely free.
             </p>
 
             {/* Feature bullets */}
@@ -125,7 +125,7 @@ function Home() {
             </div>
           </div>
 
-          {/* Right: Tool preview — hidden on mobile */}
+          {/* Right: Tool preview - hidden on mobile */}
           {!isMobile && (
             <div style={{
               background: theme.navyLight, border: `1px solid ${theme.border}`,
@@ -214,7 +214,7 @@ function Home() {
             <h2 style={{ fontSize: isMobile ? 24 : 32, fontWeight: 800, color: theme.white, letterSpacing: "-0.8px", marginBottom: 12 }}>
               All Seller Tools
             </h2>
-            <p style={{ color: theme.grayMuted, fontSize: 16 }}>Professional-grade utilities — no login, no cost, no catch.</p>
+            <p style={{ color: theme.grayMuted, fontSize: 16 }}>Professional-grade utilities - no login, no cost, no catch.</p>
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fill,minmax(280px,1fr))", gap: isMobile ? 12 : 20 }}>
             {CALCULATORS.map((c) => (
@@ -251,12 +251,12 @@ function Home() {
           </div>
           <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr 1fr" : "repeat(auto-fit,minmax(200px,1fr))", gap: isMobile ? 12 : 20 }}>
             {[
-              { icon: "⚡", title: "Real-time", desc: "Calculations update instantly as you type — no submit button needed" },
+              { icon: "⚡", title: "Real-time", desc: "Calculations update instantly as you type - no submit button needed" },
               { icon: "🤖", title: "AI Powered", desc: "Smart recommendations to improve your margins and platform choice" },
               { icon: "🆓", title: "Always Free", desc: "No hidden charges, no premium plans, no credit card required" },
               { icon: "🇮🇳", title: "India First", desc: "Built for Amazon.in, Flipkart, Meesho and Jiomart specifically" },
               { icon: "📊", title: "Data Driven", desc: "Compare platforms with charts and detailed breakdowns" },
-              { icon: "🔒", title: "No Sign-up", desc: "Start using immediately — no account or registration needed" },
+              { icon: "🔒", title: "No Sign-up", desc: "Start using immediately - no account or registration needed" },
             ].map((item) => (
               <div key={item.title} style={{
                 background: "#ffffff", border: "1px solid #e2e8f0",

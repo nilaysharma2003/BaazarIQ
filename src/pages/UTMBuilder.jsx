@@ -46,9 +46,9 @@ function validateUTM(inputs) {
   fields.forEach(({ key, label }) => {
     const val = inputs[key];
     if (!val) return;
-    if (val !== val.toLowerCase()) warnings.push({ type: "warn", field: label, msg: `${label} contains uppercase — use lowercase for consistent GA4 reporting` });
-    if (val.includes(" ")) warnings.push({ type: "error", field: label, msg: `${label} contains spaces — replace with underscores or dashes` });
-    if (/[^a-z0-9_.,-]/i.test(val)) warnings.push({ type: "warn", field: label, msg: `${label} contains special characters — keep it simple` });
+    if (val !== val.toLowerCase()) warnings.push({ type: "warn", field: label, msg: `${label} contains uppercase - use lowercase for consistent GA4 reporting` });
+    if (val.includes(" ")) warnings.push({ type: "error", field: label, msg: `${label} contains spaces - replace with underscores or dashes` });
+    if (/[^a-z0-9_.,-]/i.test(val)) warnings.push({ type: "warn", field: label, msg: `${label} contains special characters - keep it simple` });
   });
 
   if (!inputs.url) warnings.push({ type: "error", field: "URL", msg: "Website URL is required" });
@@ -250,11 +250,11 @@ function UTMBuilder() {
           </h1>
           <p style={{ color: "#94a3b8", fontSize: 18, maxWidth: 620, margin: "0 auto 16px", lineHeight: 1.75 }}>
             Generate GA4-ready UTM tracking URLs with one-click platform presets,
-            bulk URL generator, QR codes and AI-powered naming suggestions — completely free.
+            bulk URL generator, QR codes and AI-powered naming suggestions - completely free.
           </p>
           <p style={{ color: "#64748b", fontSize: 15, maxWidth: 560, margin: "0 auto 32px", lineHeight: 1.7 }}>
             Track every click from Google Ads, Facebook, Instagram, Email and WhatsApp
-            campaigns — and see exactly which source drives the most sales in Google Analytics 4.
+            campaigns - and see exactly which source drives the most sales in Google Analytics 4.
           </p>
           <div style={{
             display: "flex", justifyContent: "center", gap: 0, flexWrap: "wrap",
@@ -533,7 +533,7 @@ function UTMBuilder() {
                           fontFamily: "'JetBrains Mono', monospace",
                         }}>{label}</span>
                         <span style={{ fontSize: 12, color: value ? "#0f172a" : "#dc2626", fontFamily: "'JetBrains Mono', monospace", flex: 1 }}>
-                          {value || (required ? "⚠️ Required" : "—")}
+                          {value || (required ? "⚠️ Required" : "-")}
                         </span>
                       </div>
                     ))}
@@ -601,7 +601,7 @@ function UTMBuilder() {
         {activeTab === "bulk" && (
           <div style={{ background: "#fff", borderRadius: "0 16px 16px 16px", border: "1px solid #e8ecf0", padding: "28px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <h2 style={{ fontWeight: 700, fontSize: 18, color: "#0f172a", marginBottom: 6 }}>Bulk UTM Generator</h2>
-            <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Paste up to 10 URLs (one per line) — UTM parameters from the Builder tab will be applied to all</p>
+            <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Paste up to 10 URLs (one per line) - UTM parameters from the Builder tab will be applied to all</p>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               <div>
                 <label style={labelStyle}>Input URLs (one per line)</label>
@@ -647,11 +647,11 @@ function UTMBuilder() {
         {activeTab === "history" && (
           <div style={{ background: "#fff", borderRadius: "0 16px 16px 16px", border: "1px solid #e8ecf0", padding: "28px", marginBottom: 48, boxShadow: "0 2px 8px rgba(0,0,0,0.04)" }}>
             <h2 style={{ fontWeight: 700, fontSize: 18, color: "#0f172a", marginBottom: 6 }}>Recent UTM Links</h2>
-            <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Last 5 generated URLs — saved locally in your browser</p>
+            <p style={{ color: "#64748b", fontSize: 13, marginBottom: 20 }}>Last 5 generated URLs - saved locally in your browser</p>
             {history.length === 0 ? (
               <div style={{ textAlign: "center", padding: "48px 24px", color: "#94a3b8" }}>
                 <div style={{ fontSize: 40, marginBottom: 12 }}>🕐</div>
-                <p>No history yet — generate a UTM link to see it here</p>
+                <p>No history yet - generate a UTM link to see it here</p>
               </div>
             ) : (
               <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
@@ -737,10 +737,10 @@ function UTMBuilder() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 20 }}>
               {[
-                ["Step 1 — Choose a platform preset", "Click a platform button (Google, Facebook, Instagram etc.) to auto-fill Source and Medium in one click."],
-                ["Step 2 — Enter your URL", "Paste the landing page URL you want to track — the page customers will land on after clicking your link."],
-                ["Step 3 — Name your campaign", "Enter a campaign name using underscores (e.g. diwali_sale_2025) so GA4 reports are clean and readable."],
-                ["Step 4 — Copy and use", "Copy the generated UTM URL and use it in your ads, emails, social posts or WhatsApp campaigns."],
+                ["Step 1 - Choose a platform preset", "Click a platform button (Google, Facebook, Instagram etc.) to auto-fill Source and Medium in one click."],
+                ["Step 2 - Enter your URL", "Paste the landing page URL you want to track - the page customers will land on after clicking your link."],
+                ["Step 3 - Name your campaign", "Enter a campaign name using underscores (e.g. diwali_sale_2025) so GA4 reports are clean and readable."],
+                ["Step 4 - Copy and use", "Copy the generated UTM URL and use it in your ads, emails, social posts or WhatsApp campaigns."],
               ].map(([title, desc]) => (
                 <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "18px", border: "1px solid #e8ecf0" }}>
                   <div style={{
@@ -770,9 +770,9 @@ function UTMBuilder() {
             ["What are UTM parameters?", "UTM parameters are tags added to URLs that help analytics tools like Google Analytics track where your traffic comes from. They include source, medium, campaign, term and content."],
             ["Which UTM parameters are required?", "utm_source, utm_medium, and utm_campaign are required. utm_term and utm_content are optional but recommended for paid search and A/B testing."],
             ["Why should I use lowercase in UTM parameters?", "Google Analytics 4 is case-sensitive. 'Instagram' and 'instagram' appear as two different sources in GA4 reports. Always use lowercase for consistency."],
-            ["Can I use spaces in campaign names?", "No — spaces break URLs. Use underscores (diwali_sale) or hyphens (diwali-sale) instead. Our validator will warn you if spaces are detected."],
+            ["Can I use spaces in campaign names?", "No - spaces break URLs. Use underscores (diwali_sale) or hyphens (diwali-sale) instead. Our validator will warn you if spaces are detected."],
             ["What is utm_content used for?", "utm_content helps you A/B test ads or links. For example, if you have two banner designs, use utm_content=banner_v1 and utm_content=banner_v2 to see which performs better."],
-            ["Will UTM links work on all platforms?", "Yes — UTM parameters work with Google Analytics 4, Adobe Analytics, Mixpanel, and most other analytics platforms. They're a universal standard."],
+            ["Will UTM links work on all platforms?", "Yes - UTM parameters work with Google Analytics 4, Adobe Analytics, Mixpanel, and most other analytics platforms. They're a universal standard."],
           ].map(([q, a]) => <FAQItem key={q} q={q} a={a} />)}
         </div>
       </div>

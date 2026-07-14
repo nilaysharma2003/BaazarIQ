@@ -7,7 +7,7 @@ const BARCODE_TYPES = [
     id: "EAN13",
     label: "EAN-13",
     icon: "🔢",
-    desc: "International retail standard — 13 digits",
+    desc: "International retail standard - 13 digits",
     placeholder: "5901234123457",
     validate: (v) => /^\d{13}$/.test(v),
     error: "EAN-13 requires exactly 13 digits",
@@ -17,7 +17,7 @@ const BARCODE_TYPES = [
     id: "UPC",
     label: "UPC-A",
     icon: "🇺🇸",
-    desc: "US/Canada retail standard — 12 digits",
+    desc: "US/Canada retail standard - 12 digits",
     placeholder: "012345678905",
     validate: (v) => /^\d{12}$/.test(v),
     error: "UPC-A requires exactly 12 digits",
@@ -27,7 +27,7 @@ const BARCODE_TYPES = [
     id: "CODE128",
     label: "Code 128",
     icon: "📦",
-    desc: "High density alphanumeric — warehouse & logistics",
+    desc: "High density alphanumeric - warehouse & logistics",
     placeholder: "SKU-ABC-12345",
     validate: (v) => v.length >= 1 && v.length <= 80,
     error: "Code 128 supports 1-80 characters",
@@ -37,7 +37,7 @@ const BARCODE_TYPES = [
     id: "CODE39",
     label: "Code 39",
     icon: "🏭",
-    desc: "Industrial alphanumeric — asset tracking",
+    desc: "Industrial alphanumeric - asset tracking",
     placeholder: "PROD-001",
     validate: (v) => /^[A-Z0-9+\-. $/]+$/.test(v) && v.length >= 1,
     error: "Code 39 supports A-Z, 0-9 and special chars only",
@@ -47,7 +47,7 @@ const BARCODE_TYPES = [
     id: "QR",
     label: "QR Code",
     icon: "⬛",
-    desc: "2D code — URLs, text, product info",
+    desc: "2D code - URLs, text, product info",
     placeholder: "https://yourstore.com/product",
     validate: (v) => v.length >= 1 && v.length <= 2000,
     error: "QR Code supports up to 2000 characters",
@@ -56,9 +56,9 @@ const BARCODE_TYPES = [
 ];
 
 const LABEL_SIZES = [
-  { id: "small", label: "Small — 38×25mm", width: 152, height: 100 },
-  { id: "medium", label: "Medium — 50×30mm", width: 200, height: 120 },
-  { id: "large", label: "Large — 100×50mm", width: 400, height: 200 },
+  { id: "small", label: "Small - 38×25mm", width: 152, height: 100 },
+  { id: "medium", label: "Medium - 50×30mm", width: 200, height: 120 },
+  { id: "large", label: "Large - 100×50mm", width: 400, height: 200 },
 ];
 
 function getAIRecommendation({ barcodeType }) {
@@ -190,7 +190,7 @@ function BarcodeCanvas({ inputs, size }) {
         }}>
           <span style={{ fontSize: 16 }}>{error ? "❌" : valid ? "✅" : ""}</span>
           <span style={{ fontSize: 12, color: error ? "#ef4444" : "#2563eb", fontWeight: 600 }}>
-            {error || (valid ? "Valid barcode — ready to download" : "")}
+            {error || (valid ? "Valid barcode - ready to download" : "")}
           </span>
         </div>
       )}
@@ -320,7 +320,7 @@ function BarcodeGenerator() {
   return (
     <div style={{ fontFamily: "'Poppins', sans-serif", background: "#f1f5f9", minHeight: "100vh" }}>
 
-      {/* ✅ UPDATED HERO — matches FBA Calculator style */}
+      {/* ✅ UPDATED HERO - matches FBA Calculator style */}
       <section style={{
         background: "#030a10",
         padding: isMobile ? "48px 16px 56px" : "80px 24px 90px",
@@ -352,7 +352,7 @@ function BarcodeGenerator() {
             color: "#35d0b2", fontSize: 16, fontWeight: 600,
             marginBottom: 12, letterSpacing: "0.3px",
           }}>
-            Generate Barcodes Instantly — No Sign-up, No Cost
+            Generate Barcodes Instantly - No Sign-up, No Cost
           </p>
 
           {/* Main Heading */}
@@ -375,7 +375,7 @@ function BarcodeGenerator() {
             maxWidth: 620, margin: "0 auto 16px",
             lineHeight: 1.75,
           }}>
-            Generate EAN-13, UPC-A, Code 128, Code 39 and QR codes instantly —
+            Generate EAN-13, UPC-A, Code 128, Code 39 and QR codes instantly -
             with a built-in label designer, bulk barcode generator and AI
             recommendations for every barcode type.
           </p>
@@ -485,7 +485,7 @@ function BarcodeGenerator() {
                 <div style={{ display: "flex", gap: 8 }}>
                   {LABEL_SIZES.map((s) => (
                     <button key={s.id} onClick={() => set("labelSize", s.id)} style={{ flex: 1, padding: "8px 6px", borderRadius: 8, cursor: "pointer", border: `1.5px solid ${inputs.labelSize === s.id ? "#2563eb" : "#e8ecf0"}`, background: inputs.labelSize === s.id ? "#eff6ff" : "#f8fafc", color: inputs.labelSize === s.id ? "#2563eb" : "#64748b", fontSize: 11, fontWeight: 600, fontFamily: "'Poppins', sans-serif" }}>
-                      {s.label.split("—")[0]}
+                      {s.label.split("-")[0]}
                     </button>
                   ))}
                 </div>
@@ -561,7 +561,7 @@ function BarcodeGenerator() {
             {/* Bulk list */}
             {bulkList.length > 0 && (
               <div style={{ background: "#fff", borderRadius: 14, border: "1px solid #e8ecf0", padding: "18px", maxHeight: 280, overflowY: "auto" }}>
-                <div style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>🗂️ Bulk Generated — {bulkList.length} barcodes</div>
+                <div style={{ fontSize: 13, fontWeight: 800, color: "#0f172a", marginBottom: 12 }}>🗂️ Bulk Generated - {bulkList.length} barcodes</div>
                 {bulkList.map((num, i) => (
                   <div key={i} style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "7px 0", borderBottom: "1px solid #f1f5f9" }}>
                     <span style={{ fontSize: 12, color: "#94a3b8" }}>#{i + 1}</span>
@@ -630,9 +630,9 @@ function BarcodeGenerator() {
           <h2 style={{ fontWeight: 900, fontSize: 24, marginBottom: 24, color: "#0f172a", letterSpacing: "-0.5px" }}>Frequently Asked Questions</h2>
           {[
             ["What barcode do I need for Amazon India?", "For Amazon India, you need an EAN-13 barcode. It's the international standard accepted by Amazon.in and all major Indian marketplaces including Flipkart and Meesho."],
-            ["Can I use a free barcode generator for retail?", "For internal use and testing, yes. For retail shelf products, you need a GS1-registered barcode number. The barcode image itself can be generated free — but the number must be officially registered."],
+            ["Can I use a free barcode generator for retail?", "For internal use and testing, yes. For retail shelf products, you need a GS1-registered barcode number. The barcode image itself can be generated free - but the number must be officially registered."],
             ["What is the difference between EAN-13 and UPC-A?", "EAN-13 is 13 digits and used internationally. UPC-A is 12 digits and used primarily in the US and Canada. EAN-13 is more widely accepted for Indian ecommerce."],
-            ["Can I generate multiple barcodes at once?", "Yes — use the Bulk Generator feature. Enter a starting barcode number, set the quantity (up to 50), and click Generate to create sequential barcodes."],
+            ["Can I generate multiple barcodes at once?", "Yes - use the Bulk Generator feature. Enter a starting barcode number, set the quantity (up to 50), and click Generate to create sequential barcodes."],
             ["What format should I download?", "PNG is best for printing labels directly. For professional printing or resizing without quality loss, SVG format is recommended."],
           ].map(([q, a]) => <FAQItem key={q} q={q} a={a} />)}
         </div>

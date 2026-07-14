@@ -183,7 +183,7 @@ function WhatsAppLinkGenerator() {
           </div>
 
           <p style={{ color: "#35d0b2", fontSize: isMobile ? 13 : 16, fontWeight: 600, marginBottom: 10, letterSpacing: "0.3px" }}>
-            Turn Your Number Into a One-Click Chat Button — Free Forever
+            Turn Your Number Into a One-Click Chat Button - Free Forever
           </p>
 
           <h1 style={{
@@ -200,7 +200,7 @@ function WhatsAppLinkGenerator() {
             maxWidth: 620, margin: "0 auto 12px", lineHeight: 1.75,
           }}>
             Generate WhatsApp click-to-chat links with pre-filled messages, QR codes,
-            UTM tracking and AI message suggestions — instantly, for free.
+            UTM tracking and AI message suggestions - instantly, for free.
           </p>
 
           {!isMobile && (
@@ -511,7 +511,7 @@ function WhatsAppLinkGenerator() {
                 wordBreak: "break-all", fontFamily: "'JetBrains Mono', monospace",
                 fontSize: 12, color: "#35d0b2", lineHeight: 1.6,
               }}>
-                {isValidPhone ? generatedLink : "https://wa.me/ — enter phone number to generate"}
+                {isValidPhone ? generatedLink : "https://wa.me/ - enter phone number to generate"}
               </div>
 
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8 }}>
@@ -566,7 +566,7 @@ function WhatsAppLinkGenerator() {
                   fontSize: 13, fontWeight: 600,
                   color: !inputs.phoneNumber ? "#94a3b8" : isValidPhone ? "#16a34a" : "#dc2626",
                 }}>
-                  {!inputs.phoneNumber ? "Enter phone number to validate" : isValidPhone ? "Valid number — link is ready" : "Invalid number format"}
+                  {!inputs.phoneNumber ? "Enter phone number to validate" : isValidPhone ? "Valid number - link is ready" : "Invalid number format"}
                 </span>
               </div>
               {isValidPhone && (
@@ -590,14 +590,15 @@ function WhatsAppLinkGenerator() {
               <p style={{ fontSize: 12, color: "#94a3b8", marginBottom: 16 }}>Scan to open WhatsApp chat</p>
               {qrDataUrl ? (
                 <>
-                  <img src={qrDataUrl} alt="WhatsApp QR Code" style={{ width: 180, height: 180, borderRadius: 12, border: "1px solid #e2e8f0", marginBottom: 16 }} />
-                  <br />
-                  <button onClick={downloadQR} style={{
-                    background: "#35d0b2", color: "#030a10", border: "none",
-                    padding: "10px 20px", borderRadius: 8, fontSize: 13,
-                    fontWeight: 700, cursor: "pointer", fontFamily: "'Poppins', sans-serif",
-                  }}>⬇️ Download PNG</button>
-                  <p style={{ fontSize: 11, color: "#94a3b8", marginTop: 8 }}>Scan with any camera app</p>
+                  <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+                    <img src={qrDataUrl} alt="WhatsApp QR Code" style={{ width: 180, height: 180, borderRadius: 12, border: "1px solid #e2e8f0" }} />
+                    <button onClick={downloadQR} style={{
+                      background: "#35d0b2", color: "#030a10", border: "none",
+                      padding: "10px 20px", borderRadius: 8, fontSize: 13,
+                      fontWeight: 700, cursor: "pointer", fontFamily: "'Poppins', sans-serif",
+                    }}>⬇️ Download PNG</button>
+                    <p style={{ fontSize: 11, color: "#94a3b8" }}>Scan with any camera app</p>
+                  </div>
                 </>
               ) : (
                 <div style={{
@@ -677,10 +678,10 @@ function WhatsAppLinkGenerator() {
             </div>
             <div style={{ display: "grid", gridTemplateColumns: isMobile ? "1fr" : "1fr 1fr", gap: 16 }}>
               {[
-                ["Step 1 — Enter your number", "Add your WhatsApp number with country code so the link connects directly to your chat."],
-                ["Step 2 — Write your message", "Add a pre-filled message so customers know exactly what to say when they contact you."],
-                ["Step 3 — Add UTM tracking", "Optionally add UTM parameters to track which campaigns are driving WhatsApp conversations."],
-                ["Step 4 — Copy & share", "Copy the link and add it to your website, Instagram bio, Facebook page or email signature."],
+                ["Step 1 - Enter your number", "Add your WhatsApp number with country code so the link connects directly to your chat."],
+                ["Step 2 - Write your message", "Add a pre-filled message so customers know exactly what to say when they contact you."],
+                ["Step 3 - Add UTM tracking", "Optionally add UTM parameters to track which campaigns are driving WhatsApp conversations."],
+                ["Step 4 - Copy & share", "Copy the link and add it to your website, Instagram bio, Facebook page or email signature."],
               ].map(([title, desc]) => (
                 <div key={title} style={{ display: "flex", gap: 14, background: "#f8fafc", borderRadius: 12, padding: "16px", border: "1px solid #e8ecf0" }}>
                   <div style={{
@@ -736,10 +737,10 @@ function WhatsAppLinkGenerator() {
           }}>FAQ</div>
           <h2 style={{ fontWeight: 800, fontSize: isMobile ? 18 : 22, marginBottom: 24, color: "#0f172a" }}>Frequently Asked Questions</h2>
           {[
-            ["What is a WhatsApp link?", "A WhatsApp link (wa.me link) lets anyone start a WhatsApp chat with you in one click — without saving your number. It's perfect for businesses, sellers and creators."],
+            ["What is a WhatsApp link?", "A WhatsApp link (wa.me link) lets anyone start a WhatsApp chat with you in one click - without saving your number. It's perfect for businesses, sellers and creators."],
             ["What is a pre-filled message?", "A pre-filled message appears automatically typed in the chat when someone opens your link. It saves the customer time and helps you understand why they're reaching out."],
             ["What are UTM parameters?", "UTM parameters are tracking codes added to your link URL. They help you track which source (Instagram, Facebook, email etc.) is sending you the most WhatsApp conversations in Google Analytics."],
-            ["Is this WhatsApp link generator free?", "Yes — 100% free, forever. No sign-up, no account, no limits. Generate as many links as you need."],
+            ["Is this WhatsApp link generator free?", "Yes - 100% free, forever. No sign-up, no account, no limits. Generate as many links as you need."],
             ["Will the link work on both mobile and desktop?", "Yes. On mobile it opens the WhatsApp app directly. On desktop it opens WhatsApp Web. Both work perfectly."],
             ["How do I add my WhatsApp link to Instagram bio?", "Copy your generated link, go to your Instagram profile → Edit Profile → Website/Bio → paste the link and save."],
           ].map(([q, a]) => <FAQItem key={q} q={q} a={a} />)}

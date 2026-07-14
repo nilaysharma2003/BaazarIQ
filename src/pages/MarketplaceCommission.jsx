@@ -421,7 +421,7 @@ function MarketplaceCommission() {
   return (
     <div style={{ background: "#f1f5f9", minHeight: "100vh", fontFamily: "'Poppins', sans-serif" }}>
 
-      {/* ✅ UPDATED HERO — matches FBA Calculator style */}
+      {/* ✅ UPDATED HERO - matches FBA Calculator style */}
       <section
         style={{
           background: "#030a10",
@@ -500,7 +500,7 @@ function MarketplaceCommission() {
             }}
           >
             Compare commission fees, closing charges and net profit across
-            Amazon, Flipkart, Meesho and Jiomart — all in one place. Find the
+            Amazon, Flipkart, Meesho and Jiomart - all in one place. Find the
             most profitable marketplace for your product before you list.
           </p>
           <p
@@ -513,7 +513,7 @@ function MarketplaceCommission() {
             }}
           >
             Our unique Platform Score ranks each marketplace by profit margin,
-            customer reach, trust score and return rate — not just fees — so you
+            customer reach, trust score and return rate - not just fees - so you
             make smarter selling decisions.
           </p>
 
@@ -1103,11 +1103,11 @@ function MarketplaceCommission() {
             ],
             [
               "Which marketplace has the lowest commission?",
-              "Meesho has the lowest commission — often 0% on most categories. But it also has lower customer reach and higher return rates.",
+              "Meesho has the lowest commission - often 0% on most categories. But it also has lower customer reach and higher return rates.",
             ],
             [
               "Should I sell on multiple marketplaces?",
-              "Yes — most successful sellers list on 2-3 platforms. Use this calculator to decide which platform to prioritize based on your margins and goals.",
+              "Yes - most successful sellers list on 2-3 platforms. Use this calculator to decide which platform to prioritize based on your margins and goals.",
             ],
           ].map(([q, a]) => (
             <FAQItem key={q} q={q} a={a} />

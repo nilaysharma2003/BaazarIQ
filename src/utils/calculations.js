@@ -127,7 +127,7 @@ export function getInsights(results, inputs) {
       type: "warn",
       icon: "📌",
       title: "High Referral Fee",
-      msg: `Referral fee is ${(referralPct * 100).toFixed(0)}% — consider a lower-fee category or bundle`,
+      msg: `Referral fee is ${(referralPct * 100).toFixed(0)}% - consider a lower-fee category or bundle`,
     });
   }
   if (margin >= 30) {

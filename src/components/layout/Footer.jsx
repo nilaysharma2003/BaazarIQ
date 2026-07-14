@@ -152,7 +152,7 @@ function Footer() {
             </div>
           ) : (
             <>
-              {/* Quick Tools — Desktop */}
+              {/* Quick Tools - Desktop */}
               <div>
                 <h4 style={{ color: theme.white, fontWeight: 700, marginBottom: 16, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.6px" }}>
                   Quick Tools
@@ -174,7 +174,7 @@ function Footer() {
                 ))}
               </div>
 
-              {/* More Tools — Desktop */}
+              {/* More Tools - Desktop */}
               <div>
                 <h4 style={{ color: theme.white, fontWeight: 700, marginBottom: 16, fontSize: 13, textTransform: "uppercase", letterSpacing: "0.6px" }}>
                   More Tools
@@ -267,4 +267,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default Footer; 

@@ -200,7 +200,7 @@ export function getMarketplaceInsights(results, inputs) {
     type: "success",
     icon: "🏆",
     title: `Best Overall: ${bestOverall[0]}`,
-    msg: `${bestOverall[0]} scores ${bestOverall[1].platformScore}/100 considering profit, customer reach, trust and returns — best all-round platform for this product`,
+    msg: `${bestOverall[0]} scores ${bestOverall[1].platformScore}/100 considering profit, customer reach, trust and returns - best all-round platform for this product`,
   });
 
   // If best profit != best overall
@@ -219,7 +219,7 @@ export function getMarketplaceInsights(results, inputs) {
       type: "info",
       icon: "📦",
       title: "Amazon Customer Reach",
-      msg: `Amazon has 95/100 customer reach score — highest in India. Even with higher fees, volume can make up for lower margin per unit`,
+      msg: `Amazon has 95/100 customer reach score - highest in India. Even with higher fees, volume can make up for lower margin per unit`,
     });
   }
 

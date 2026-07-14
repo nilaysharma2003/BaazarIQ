@@ -63,7 +63,7 @@ function Header() {
         textAlign: "center", fontSize: 12,
         color: theme.navy, fontWeight: 600, letterSpacing: "0.2px",
       }}>
-        🎉 BaazarIQ is 100% free — No sign-up required. Start calculating now!
+        🎉 BaazarIQ is 100% free - No sign-up required. Start calculating now!
       </div>
 
       {/* Main nav */}
@@ -153,19 +153,7 @@ function Header() {
                   ))}
                 </div>
               )}
-            </div>
-
-            {["Resources", "Blog"].map((label) => (
-              <button key={label} style={{
-                background: "none", color: theme.grayMuted, border: "none",
-                padding: "7px 14px", borderRadius: 8, fontSize: 14,
-                fontWeight: 500, cursor: "pointer",
-                fontFamily: "'Poppins', sans-serif", transition: "color 0.15s",
-              }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = theme.white)}
-                onMouseLeave={(e) => (e.currentTarget.style.color = theme.grayMuted)}
-              >{label}</button>
-            ))}
+            </div> 
           </nav>
         )}
 
@@ -219,13 +207,18 @@ function Header() {
       {/* Mobile Menu Dropdown */}
       {isMobile && mobileMenuOpen && (
         <div style={{
+          position: "fixed",
+          top: 96,
+          left: 0,
+          right: 0,
+          bottom: 0,
           background: theme.navyLight,
           borderTop: `1px solid ${theme.border}`,
           padding: "16px 24px",
           display: "flex", flexDirection: "column", gap: 4,
-          maxHeight: "calc(100vh - 110px)",
           overflowY: "auto",
           WebkitOverflowScrolling: "touch",
+          zIndex: 99,
         }}>
           <button onClick={() => navigate("/")} style={{
             background: currentPath === "/" ? "rgba(53,208,178,0.15)" : "none",
@@ -256,18 +249,6 @@ function Header() {
               </div>
             </button>
           ))}
-
-          <div style={{ height: 1, background: theme.border, margin: "8px 0" }} />
-
-          {["Resources", "Blog"].map((label) => (
-            <button key={label} style={{
-              background: "none", color: theme.grayMuted, border: "none",
-              padding: "12px 16px", borderRadius: 8, fontSize: 15,
-              fontWeight: 500, cursor: "pointer",
-              fontFamily: "'Poppins', sans-serif", textAlign: "left",
-            }}>{label}</button>
-          ))}
-
           <button onClick={() => navigate("/fba")} style={{
             background: theme.teal, color: theme.navy, border: "none",
             padding: "12px 16px", borderRadius: 10, fontSize: 14,
