@@ -7,7 +7,7 @@ function Logo() {
   return (
     <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
       <div style={{
-        width: 32, height: 32, borderRadius: 8,
+        width: 32, height: 32, borderRadius: theme.radius.sm,
         background: theme.teal, display: "flex",
         alignItems: "center", justifyContent: "center", flexShrink: 0,
       }}>
@@ -19,11 +19,11 @@ function Logo() {
         </svg>
       </div>
       <div>
-        <div style={{ fontWeight: 700, fontSize: 17, letterSpacing: "-0.5px", lineHeight: 1.1 }}>
-          <span style={{ color: "#ffffff" }}>Baazar</span>
+        <div style={{ fontWeight: theme.fontWeight.bold, fontSize: theme.fontSize.md, letterSpacing: "-0.5px", lineHeight: theme.lineHeight.tight }}>
+          <span style={{ color: theme.white }}>Baazar</span>
           <span style={{ color: theme.teal }}>IQ</span>
         </div>
-        <div style={{ fontSize: 9, color: theme.grayMuted, letterSpacing: "0.8px", fontWeight: 600, textTransform: "uppercase" }}>
+        <div style={{ fontSize: theme.fontSize.xs, color: theme.grayMuted, letterSpacing: "0.8px", fontWeight: theme.fontWeight.semibold, textTransform: "uppercase" }}>
           Seller Tools
         </div>
       </div>
@@ -45,7 +45,6 @@ function Header() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [location]);
@@ -57,13 +56,13 @@ function Header() {
       borderBottom: `1px solid ${theme.border}`,
       fontFamily: "'Poppins', sans-serif",
     }}>
-      {/* Top announcement bar */}
+      {/* Announcement bar */}
       <div style={{
         background: theme.teal, padding: "7px 24px",
-        textAlign: "center", fontSize: 12,
-        color: theme.navy, fontWeight: 600, letterSpacing: "0.2px",
+        textAlign: "center", fontSize: theme.fontSize.xs,
+        color: theme.navy, fontWeight: theme.fontWeight.semibold, letterSpacing: "0.2px",
       }}>
-        🎉 BaazarIQ is 100% free - No sign-up required. Start calculating now!
+        BaazarIQ is 100% free - No sign-up required. Start calculating now!
       </div>
 
       {/* Main nav */}
@@ -83,9 +82,9 @@ function Header() {
             <button onClick={() => navigate("/")} style={{
               background: currentPath === "/" ? "rgba(53,208,178,0.15)" : "none",
               color: currentPath === "/" ? theme.teal : theme.grayMuted,
-              border: "none", padding: "7px 14px", borderRadius: 8,
-              fontSize: 14, fontWeight: 500, cursor: "pointer",
-              fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
+              border: "none", padding: "7px 14px", borderRadius: theme.radius.sm,
+              fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.medium,
+              cursor: "pointer", fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
             }}
               onMouseEnter={(e) => (e.currentTarget.style.color = theme.white)}
               onMouseLeave={(e) => (e.currentTarget.style.color = currentPath === "/" ? theme.teal : theme.grayMuted)}
@@ -102,9 +101,9 @@ function Header() {
               <button style={{
                 display: "flex", alignItems: "center", gap: 5,
                 background: "none", color: theme.grayMuted, border: "none",
-                padding: "7px 14px", borderRadius: 8, fontSize: 14,
-                fontWeight: 500, cursor: "pointer",
-                fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
+                padding: "7px 14px", borderRadius: theme.radius.sm,
+                fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.medium,
+                cursor: "pointer", fontFamily: "'Poppins', sans-serif", transition: "all 0.15s",
               }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = theme.white)}
                 onMouseLeave={(e) => (e.currentTarget.style.color = theme.grayMuted)}
@@ -120,13 +119,13 @@ function Header() {
                 <div style={{
                   position: "absolute", top: "calc(100% + 0px)", left: "50%",
                   transform: "translateX(-50%)", background: theme.navyLight,
-                  border: `1px solid ${theme.border}`, borderRadius: 14,
+                  border: `1px solid ${theme.border}`, borderRadius: theme.radius.md,
                   padding: "8px", width: 320,
-                  boxShadow: "0 12px 40px rgba(0,0,0,0.4)", zIndex: 200,
+                  boxShadow: theme.shadow.lg, zIndex: 200,
                 }}>
                   <div style={{
-                    fontSize: 11, fontWeight: 600, color: theme.grayMuted,
-                    letterSpacing: "0.6px", textTransform: "uppercase",
+                    fontSize: theme.fontSize.xs, fontWeight: theme.fontWeight.semibold,
+                    color: theme.grayMuted, letterSpacing: "0.6px", textTransform: "uppercase",
                     padding: "6px 10px", marginBottom: 4,
                   }}>All Seller Tools</div>
                   {CALCULATORS.map((c) => (
@@ -134,26 +133,26 @@ function Header() {
                       display: "flex", alignItems: "center", gap: 10,
                       width: "100%", padding: "9px 10px", border: "none",
                       background: currentPath === c.href ? "rgba(53,208,178,0.1)" : "transparent",
-                      borderRadius: 8, cursor: "pointer", textAlign: "left",
+                      borderRadius: theme.radius.sm, cursor: "pointer", textAlign: "left",
                       fontFamily: "'Poppins', sans-serif", transition: "background 0.15s",
                     }}
                       onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(53,208,178,0.08)")}
                       onMouseLeave={(e) => (e.currentTarget.style.background = currentPath === c.href ? "rgba(53,208,178,0.1)" : "transparent")}
                     >
                       <div style={{
-                        width: 34, height: 34, borderRadius: 8,
+                        width: 34, height: 34, borderRadius: theme.radius.sm,
                         background: "rgba(53,208,178,0.1)", display: "flex",
                         alignItems: "center", justifyContent: "center", fontSize: 16, flexShrink: 0,
                       }}>{c.icon}</div>
                       <div>
-                        <div style={{ fontSize: 13, fontWeight: 600, color: theme.white }}>{c.name}</div>
-                        <div style={{ fontSize: 11, color: theme.grayMuted }}>{c.desc}</div>
+                        <div style={{ fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.semibold, color: theme.white }}>{c.name}</div>
+                        <div style={{ fontSize: theme.fontSize.xs, color: theme.grayMuted }}>{c.desc}</div>
                       </div>
                     </button>
                   ))}
                 </div>
               )}
-            </div> 
+            </div>
           </nav>
         )}
 
@@ -164,18 +163,18 @@ function Header() {
               display: "flex", alignItems: "center", gap: 5,
               background: "rgba(53,208,178,0.1)",
               border: `1px solid rgba(53,208,178,0.3)`,
-              borderRadius: 100, padding: "4px 12px",
+              borderRadius: theme.radius.full, padding: "4px 12px",
             }}>
               <div style={{ width: 6, height: 6, borderRadius: "50%", background: theme.teal }} />
-              <span style={{ fontSize: 11, fontWeight: 600, color: theme.teal }}>8 Free Tools</span>
+              <span style={{ fontSize: theme.fontSize.xs, fontWeight: theme.fontWeight.semibold, color: theme.teal }}>8 Free Tools</span>
             </div>
             <button onClick={() => navigate("/fba")} style={{
               background: theme.teal, color: theme.navy, border: "none",
-              padding: "9px 18px", borderRadius: 8, fontSize: 13,
-              fontWeight: 700, cursor: "pointer",
-              fontFamily: "'Poppins', sans-serif",
+              padding: "9px 18px", borderRadius: theme.radius.sm,
+              fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.bold,
+              cursor: "pointer", fontFamily: "'Poppins', sans-serif",
               display: "flex", alignItems: "center", gap: 6,
-            }}>Try FBA Calc →</button>
+            }}>Try FBA Calc</button>
           </div>
         )}
 
@@ -207,30 +206,22 @@ function Header() {
       {/* Mobile Menu Dropdown */}
       {isMobile && mobileMenuOpen && (
         <div style={{
-          position: "fixed",
-          top: 96,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: theme.navyLight,
-          borderTop: `1px solid ${theme.border}`,
-          padding: "16px 24px",
-          display: "flex", flexDirection: "column", gap: 4,
-          overflowY: "auto",
-          WebkitOverflowScrolling: "touch",
-          zIndex: 99,
+          position: "fixed", top: 96, left: 0, right: 0, bottom: 0,
+          background: theme.navyLight, borderTop: `1px solid ${theme.border}`,
+          padding: "16px 24px", display: "flex", flexDirection: "column", gap: 4,
+          overflowY: "auto", WebkitOverflowScrolling: "touch", zIndex: 99,
         }}>
           <button onClick={() => navigate("/")} style={{
             background: currentPath === "/" ? "rgba(53,208,178,0.15)" : "none",
             color: currentPath === "/" ? theme.teal : theme.white,
-            border: "none", padding: "12px 16px", borderRadius: 8,
-            fontSize: 15, fontWeight: 600, cursor: "pointer",
-            fontFamily: "'Poppins', sans-serif", textAlign: "left",
-          }}>🏠 Home</button>
+            border: "none", padding: "12px 16px", borderRadius: theme.radius.sm,
+            fontSize: theme.fontSize.md, fontWeight: theme.fontWeight.semibold,
+            cursor: "pointer", fontFamily: "'Poppins', sans-serif", textAlign: "left",
+          }}>Home</button>
 
           <div style={{
-            fontSize: 11, fontWeight: 600, color: theme.grayMuted,
-            letterSpacing: "0.6px", textTransform: "uppercase",
+            fontSize: theme.fontSize.xs, fontWeight: theme.fontWeight.semibold,
+            color: theme.grayMuted, letterSpacing: "0.6px", textTransform: "uppercase",
             padding: "10px 16px 4px",
           }}>All Tools</div>
 
@@ -238,23 +229,23 @@ function Header() {
             <button key={c.id} onClick={() => navigate(c.href)} style={{
               display: "flex", alignItems: "center", gap: 10,
               background: currentPath === c.href ? "rgba(53,208,178,0.1)" : "transparent",
-              border: "none", padding: "10px 16px", borderRadius: 8,
-              cursor: "pointer", textAlign: "left",
-              fontFamily: "'Poppins', sans-serif",
+              border: "none", padding: "10px 16px", borderRadius: theme.radius.sm,
+              cursor: "pointer", textAlign: "left", fontFamily: "'Poppins', sans-serif",
             }}>
               <span style={{ fontSize: 18 }}>{c.icon}</span>
               <div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: theme.white }}>{c.name}</div>
-                <div style={{ fontSize: 11, color: theme.grayMuted }}>{c.desc}</div>
+                <div style={{ fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.semibold, color: theme.white }}>{c.name}</div>
+                <div style={{ fontSize: theme.fontSize.xs, color: theme.grayMuted }}>{c.desc}</div>
               </div>
             </button>
           ))}
+
           <button onClick={() => navigate("/fba")} style={{
             background: theme.teal, color: theme.navy, border: "none",
-            padding: "12px 16px", borderRadius: 10, fontSize: 14,
-            fontWeight: 700, cursor: "pointer",
-            fontFamily: "'Poppins', sans-serif", marginTop: 8,
-          }}>📦 Try FBA Calculator →</button>
+            padding: "12px 16px", borderRadius: theme.radius.md,
+            fontSize: theme.fontSize.sm, fontWeight: theme.fontWeight.bold,
+            cursor: "pointer", fontFamily: "'Poppins', sans-serif", marginTop: 8,
+          }}>Try FBA Calculator</button>
         </div>
       )}
     </header>
